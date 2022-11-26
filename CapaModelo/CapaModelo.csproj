@@ -42,8 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncEje.cs" />
+    <Compile Include="EjePrincipal.cs" />
+    <Compile Include="Encuesta.cs" />
+    <Compile Include="GeoEje.cs" />
+    <Compile Include="Geografia.cs" />
+    <Compile Include="Indec.cs" />
+    <Compile Include="Indicador.cs" />
+    <Compile Include="Perfil.cs" />
+    <Compile Include="PerfilEje.cs" />
+    <Compile Include="PerInd.cs" />
+    <Compile Include="Pregunta.cs" />
+    <Compile Include="PreInd.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unidad.cs" />
+    <Compile Include="Usuario.cs" />
+    <Compile Include="UsuRol.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
