@@ -110,7 +110,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Perfiles</a>
+                                        <a class="nav-link" name="roles" href="@Url.Action("Index","Perfil")"><i class="fas fa-user-friends"></i> Roles</a>
                                     </li>
 
                                 </ul>
@@ -295,6 +295,11 @@
         $.MisUrls.urls({ Url_ObtenerRoles: '@Url.Action("Obtener", "Rol")' });
         $.MisUrls.urls({ Url_GuardarRol: '@Url.Action("Guardar", "Rol")' });
         $.MisUrls.urls({ Url_EliminarRol: '@Url.Action("Eliminar", "Rol")' });
+
+        //CONTROLADOR PERFILES
+        $.MisUrls.urls({ Url_ObtenerPerfil: '@Url.Action("Obtener", "Perfil")' });
+        $.MisUrls.urls({ Url_GuardarPerfil: '@Url.Action("Guardar", "Perfil")' });
+        $.MisUrls.urls({ Url_EliminarPerfil: '@Url.Action("Eliminar", "Perfil")' });
 
 
         //lenguaje español datatable

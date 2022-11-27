@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_Geografia
+    public class CD_Geografia
     {
         public static List<Geografia> ObtenerGeografia()
         {
@@ -44,5 +44,101 @@ namespace CapaDatos
             }
 
         }
+        /*REGISTRAR GEOGRAFIA*/
+        public static bool RegistrarGeografia(Geografia oGeografia)
+        {
+
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_RegistrarGeografia", oConexion);
+                    cmd.Parameters.AddWithValue("Pais", oGeografia.Pais);
+                    cmd.Parameters.AddWithValue("CoordenadasX", oGeografia.CoordenadasX);
+                    cmd.Parameters.AddWithValue("CoordenadasY", oGeografia.CoordenadasY);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+
+            }
+
+            return respuesta;
+
+        }
+
+        public static bool ModificarGeografia(Geografia oGeografia)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_ModificarGeografia", oConexion);
+                    cmd.Parameters.AddWithValue("IdGeografia", oGeografia.IdGeografia);
+                    cmd.Parameters.AddWithValue("Pais", oGeografia.Pais);
+                    cmd.Parameters.AddWithValue("CoordenadasX", oGeografia.CoordenadasX);
+                    cmd.Parameters.AddWithValue("CoordenadasY", oGeografia.CoordenadasY);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+            }
+
+            return respuesta;
+
+        }
+
+        public static bool EliminarGeografia(int IdGeografia)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_EliminarGeografia", oConexion);
+                    cmd.Parameters.AddWithValue("IdGeografia", IdGeografia);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+
+            }
+
+            return respuesta;
+
+        }
+
+
+
     }
 }
