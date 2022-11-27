@@ -14,10 +14,15 @@ namespace CapaModelo
          https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/models-data/validation-with-the-data-annotation-validators-cs
         */
         [Required]
-        [StringLength(300, MinimumLength = 3, ErrorMessage = "EL campo debe tener como mínimo 3 caracteres y como máximo 300")] public string Nombre { get; set; }
+        [StringLength(300, MinimumLength = 3, ErrorMessage = "EL campo debe tener como mínimo 3 caracteres y como máximo 300")] 
+        public string Nombre { get; set; }
         /*Metemos controles en aquellos campos que sabemos que no pueden ser nulos*/
         [StringLength(300)]
         public string Descripcion { get; set; }
+        public bool Activo { get; set; }
+
+
+
 
     }
 }

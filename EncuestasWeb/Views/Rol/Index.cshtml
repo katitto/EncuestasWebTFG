@@ -11,6 +11,7 @@
         }
     </style>
 }
+<!--compatble con menú-->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item" aria-current="page">Roles</li>
@@ -21,7 +22,7 @@
         <div class="card border-dark">
             <div class="card-header text-white bg-dark">
                 <h5 class="float-left">Lista de Roles</h5>
-                <button class="btn btn-success btn-sm float-right" onclick="">
+                <button class="btn btn-success btn-sm float-right" onclick="abrirPopUpForm(null)">
                     <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo
                 </button>
             </div>
@@ -31,13 +32,13 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Descripcion</th>
+                            <th>Estado</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
             </div>
-
         </div>
 
     </div>
@@ -48,7 +49,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Rol</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -60,41 +61,18 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="txtdocumentoidentidad">Documento Identidad <span class="error"></span></label>
-                                <input type="text" class="form-control required" id="txtdocumentoidentidad" name="documentoidentidad" autocomplete="9%%943511">
+                                <label for="txtnombre">Nombre <span class="error"></span></label>
+                                <input type="text" class="form-control required" id="txtnombre" name="nombre" autocomplete="9%%943511">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="txtnombres">Nombres <span class="error"></span></label>
-                                <input type="text" class="form-control required" id="txtnombres" name="nombres" autocomplete="9%%943511">
+                                <label for="txtdescripcion">Descripcion <span class="error"></span></label>
+                                <input type="text" class="form-control required" id="txtdescripcion" name="descripcion" autocomplete="9%%943511">
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtapellidos">Apellidos <span class="error"></span></label>
-                                <input type="text" class="form-control required" id="txtapellidos" name="apellidos" autocomplete="9%%943511">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtcorreo">Correo <span class="error"></span></label>
-                                <input type="text" class="form-control required" id="txtcorreo" name="correo" autocomplete="9%%943511">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtclave">Contraseña <span class="error"></span></label>
-                                <input type="password" class="form-control required" id="txtclave" name="clave" autocomplete="9%%943511">
-                            </div>
-                        </div>
+                    <div class="row">                 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="cboEstado">Estado</label>
@@ -111,11 +89,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="">Guardar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+
+<!--Fin comptible menu-->
 
 @section scripts{
     <script src="@Url.Content("~/Scripts/Views/Rol_Index.js")" type="text/javascript"></script>

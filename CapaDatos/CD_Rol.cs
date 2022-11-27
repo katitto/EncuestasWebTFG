@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CapaDatos
 {
     public class CD_Rol
-    {
+    {/*OBETNER USUARIOS*/
 
         public static List<Rol> ObtenerRoles()
         {
@@ -33,6 +33,7 @@ namespace CapaDatos
                             IdRol = Convert.ToInt32(dr["IdRol"].ToString()),
                             Nombre = dr["Nombre"].ToString(),
                             Descripcion = dr["Descripcion"].ToString(),
+                            Activo = Convert.ToBoolean(dr["Activo"]),
                         });
                     }
                     dr.Close();
@@ -47,6 +48,99 @@ namespace CapaDatos
                 }
             }
         }
+        public static bool RegistrarRol(Rol oRol)
+        {
+
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_RegistrarRol", oConexion);
+                    cmd.Parameters.AddWithValue("Nombre", oRol.Nombre);
+                    cmd.Parameters.AddWithValue("Descripcion", oRol.Descripcion);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+
+            }
+
+            return respuesta;
+
+        }
+
+        public static bool ModificarRol(Rol oRol)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_ModificarRol", oConexion);
+                    cmd.Parameters.AddWithValue("IdRol", oRol.IdRol);
+                    cmd.Parameters.AddWithValue("Nombre", oRol.Nombre);
+                    cmd.Parameters.AddWithValue("Descripcion", oRol.Descripcion);
+                    cmd.Parameters.AddWithValue("Activo", oRol.Activo);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+            }
+
+            return respuesta;
+
+        }
+
+        public static bool EliminarRol(int IdRol)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_EliminarRol", oConexion);
+                    cmd.Parameters.AddWithValue("IdRol", IdRol);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+
+            }
+
+            return respuesta;
+
+        }
+
+
+
     }
 }
-
