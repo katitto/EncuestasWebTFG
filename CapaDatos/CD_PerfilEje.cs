@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_PerfilEje
+    public class CD_PerfilEje
     {
         public static List<PerfilEje> ObtenerPerfilEje()
         {

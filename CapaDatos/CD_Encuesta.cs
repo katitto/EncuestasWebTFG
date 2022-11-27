@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_Encuesta
+    public class CD_Encuesta
     {
         public static List<Encuesta> ObtenerEncuesta()
         {

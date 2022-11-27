@@ -124,7 +124,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Usuarios</a>
+                                        <a class="nav-link" name="usuarios" href="@Url.Action("Index","Usuario")"><i class="fas fa-user-friends"></i> Usuarios</a>
                                     </li>
                                     <li>
                                         <a class="nav-link" name="roles" href="@Url.Action("Index","Rol")"><i class="fas fa-user-friends"></i> Roles</a>
@@ -301,6 +301,22 @@
         $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });
 
     </script>
+
+    <script type="text/javascript">
+
+        $.extend({ MisUrls: { url: {}, urls: function (a) { $.extend($.MisUrls.url, a); } } });
+
+        //CONTROLADOR USUARIOS
+        $.MisUrls.urls({ Url_ObtenerUsuarios: '@Url.Action("Obtener", "Usuario")' });
+        $.MisUrls.urls({ Url_GuardarUsuarios: '@Url.Action("Guardar", "Usuario")' });
+        $.MisUrls.urls({ Url_EliminarUsuarios: '@Url.Action("Eliminar", "Usuario")' });
+
+
+        //lenguaje español datatable
+        $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });
+
+    </script>
+
     <!--ESTO NO HARÍA FALTA-->
     <script>
         function activarMenu(menuactivo) {

@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_Geografia
+    public class CD_Geografia
     {
         public static List<Geografia> ObtenerGeografia()
         {
