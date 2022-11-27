@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    public class CD_PerInd
+    class CD_PerInd
     {
         public static List<PerInd> ObtenerPerInd()
         {
