@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    public class CD_UsuRol
+    class CD_UsuRol
     {
         public static List<UsuRol> ObtenerUsuRol()
         {

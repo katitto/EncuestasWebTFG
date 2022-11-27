@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    public class CD_Pregunta
+    class CD_Pregunta
     {
         public static List<Pregunta> ObtenerPregunta()
         {
@@ -42,87 +42,6 @@ namespace CapaDatos
                     return rptListaPregunta;
                 }
             }
-        }
-
-        public static bool RegistrarPregunta(Pregunta pre)
-        {
-            bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand("usp_RegistrarPregunta", oConexion);
-                    cmd.Parameters.AddWithValue("IdPregunta", pre.IdPregunta);
-                    cmd.Parameters.AddWithValue("Tipo", pre.Tipo);
-                    cmd.Parameters.AddWithValue("Descripcion", pre.Descripcion);
-                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    oConexion.Open();
-                    cmd.ExecuteNonQuery();
-
-                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
-                }
-                catch (Exception ex)
-                {
-                    respuesta = false;
-                }
-            }
-            return respuesta;
-        }
-
-        public static bool ModificarPregunta(Pregunta pre)
-        {
-            bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand("usp_ModificarPregunta", oConexion);
-                    cmd.Parameters.AddWithValue("IdPregunta", pre.IdPregunta);
-                    cmd.Parameters.AddWithValue("Tipo", pre.Tipo);
-                    cmd.Parameters.AddWithValue("Descripcion", pre.Descripcion);
-                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    oConexion.Open();
-                    cmd.ExecuteNonQuery();
-
-                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
-                }
-                catch (Exception ex)
-                {
-                    respuesta = false;
-                }
-            }
-            return respuesta;
-        }
-
-        public static bool EliminarPregunta(Pregunta pre)
-        {
-            bool respuesta = true;
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand("usp_EliminarPregunta", oConexion);
-                    cmd.Parameters.AddWithValue("IdPregunta", pre.IdPregunta);
-                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    oConexion.Open();
-
-                    cmd.ExecuteNonQuery();
-
-                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
-
-                }
-                catch (Exception ex)
-                {
-                    respuesta = false;
-                }
-
-            }
-
-            return respuesta;
         }
     }
 }

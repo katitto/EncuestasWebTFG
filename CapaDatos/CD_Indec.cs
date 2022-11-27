@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 namespace CapaDatos
 {
-    public class CD_Indec
+    class CD_Indec
     {
         public static List<Indec> ObtenerIndec()
         {
