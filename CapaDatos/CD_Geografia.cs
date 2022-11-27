@@ -16,7 +16,7 @@ namespace CapaDatos
             List<Geografia> rptListaGeografia = new List<Geografia>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
-                SqlCommand cmd = new SqlCommand("upn_ObtenerGeografia", oConexion);
+                SqlCommand cmd = new SqlCommand("usp_ObtenerGeografia", oConexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try

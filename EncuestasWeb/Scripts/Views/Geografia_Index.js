@@ -72,7 +72,7 @@ function Guardar() {
                 IdGeografia: $("#txtid").val(),
                 Pais: $("#txtpais").val(),
                 CoordenadasX: $("#txtcoordenadasx").val(),
-                CoordenadasX: $("#txtcoordenadasy").val()
+                CoordenadasY: $("#txtcoordenadasy").val()
             }
         }
 

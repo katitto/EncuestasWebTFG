@@ -15,7 +15,7 @@ namespace EncuestasWeb.Controllers
         {
             return View();
         }
-        //OBTIENE LISTA DE GeografiaES
+        //OBTIENE LISTA DE Geografia
         public JsonResult Obtener()
 
         {
