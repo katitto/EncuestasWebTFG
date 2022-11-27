@@ -43,7 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD_EncEje.cs" />
+    <Compile Include="CD_EjePrincipal.cs" />
+    <Compile Include="CD_Encuesta.cs" />
+    <Compile Include="CD_GeoEje.cs" />
+    <Compile Include="CD_Geografia.cs" />
+    <Compile Include="CD_Indec.cs" />
+    <Compile Include="CD_Indicador.cs" />
+    <Compile Include="CD_Perfil.cs" />
+    <Compile Include="CD_PerfilEje.cs" />
+    <Compile Include="CD_PerInd.cs" />
+    <Compile Include="CD_Pregunta.cs" />
+    <Compile Include="CD_PreInd.cs" />
     <Compile Include="CD_Rol.cs" />
+    <Compile Include="CD_Unidad.cs" />
+    <Compile Include="CD_Usuario.cs" />
+    <Compile Include="CD_UsuRol.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
