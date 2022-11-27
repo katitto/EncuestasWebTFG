@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_EncEje
+    public class CD_EncEje
     {
         public static List<EncEje> ObtenerEncEje()
         {

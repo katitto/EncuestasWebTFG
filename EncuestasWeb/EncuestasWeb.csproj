@@ -129,7 +129,10 @@
     <Compile Include="Controllers\GeografiaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PreguntaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
+    <Compile Include="Controllers\UnidadController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1986,6 +1989,7 @@
     <Content Include="Scripts\Views\Geografia_Index.js" />
     <Content Include="Scripts\Views\Perfil_Index2.js" />
     <Content Include="Scripts\Views\Rol_Index.js" />
+    <Content Include="Scripts\Views\Usuario_Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2013,11 +2017,15 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Geografia\Index.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Imagenes\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Perfil\" />
+    <Folder Include="Views\Pregunta\" />
+    <Folder Include="Views\Unidad\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

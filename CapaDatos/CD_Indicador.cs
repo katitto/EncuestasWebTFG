@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 namespace CapaDatos
 {
-    class CD_Indicador
+    public class CD_Indicador
     {
         public static List<Indicador> ObtenerIndicador()
         {

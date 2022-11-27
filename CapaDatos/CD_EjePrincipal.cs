@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_EjePrincipal
+    public class CD_EjePrincipal
     {
         public static List<EjePrincipal> ObtenerEjePrincipal()
         {

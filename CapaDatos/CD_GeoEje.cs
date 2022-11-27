@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_GeoEje
+    public class CD_GeoEje
     {
         public static List<GeoEje> ObtenerGeoEje()
         {

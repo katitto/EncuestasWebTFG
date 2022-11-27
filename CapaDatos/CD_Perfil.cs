@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    public class CD_Perfil
+    public public class CD_Perfil
     {
         public static List<Perfil> ObtenerPerfil()
         {

@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_PreInd
+    public class CD_PreInd
     {
         public static List<PreInd> ObtenerPreInd()
         {
