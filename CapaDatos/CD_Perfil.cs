@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_Perfil
+    public class CD_Perfil
     {
         public static List<Perfil> ObtenerPerfil()
         {
@@ -30,7 +30,8 @@ namespace CapaDatos
                         {
                             IdPerfil =  Convert.ToInt32(dr["IdPerfil"].ToString()),
                             RefPerfil = dr["RefPerfil"].ToString(),
-                            Descripcion = dr["Descripcion"].ToString()
+                            Descripcion = dr["Descripcion"].ToString(),
+                            Activo = Convert.ToBoolean(dr["Activo"]),
                         });
                     }
                     dr.Close();
@@ -42,5 +43,100 @@ namespace CapaDatos
                 }
             }
         }
+        /*REGISTRAR ROL*/
+        public static bool RegistrarPerfil(Perfil oPerfil)
+        {
+
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_RegistrarPerfil", oConexion);
+                    cmd.Parameters.AddWithValue("RefPerfil", oPerfil.RefPerfil);
+                    cmd.Parameters.AddWithValue("Descripcion", oPerfil.Descripcion);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+
+            }
+
+            return respuesta;
+
+        }
+
+        public static bool ModificarPerfil(Perfil oPerfil)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_ModificarPerfil", oConexion);
+                    cmd.Parameters.AddWithValue("IdPerfil", oPerfil.IdPerfil);
+                    cmd.Parameters.AddWithValue("RefPerfil", oPerfil.RefPerfil);
+                    cmd.Parameters.AddWithValue("Descripcion", oPerfil.Descripcion);
+                    cmd.Parameters.AddWithValue("Activo", oPerfil.Activo);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+            }
+
+            return respuesta;
+
+        }
+
+        public static bool EliminarPerfil(int IdPerfil)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_EliminarPerfil", oConexion);
+                    cmd.Parameters.AddWithValue("IdPerfil", IdPerfil);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+
+            }
+
+            return respuesta;
+
+        }
+
+
+
     }
 }

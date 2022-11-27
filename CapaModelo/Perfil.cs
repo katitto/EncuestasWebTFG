@@ -11,6 +11,7 @@ namespace CapaModelo
         public int IdPerfil { get; set; }
         public string RefPerfil { get; set; }
         public string Descripcion { get; set; }
+        public bool Activo { get; set; }
 
     }
 }

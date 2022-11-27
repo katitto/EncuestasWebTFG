@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CapaDatos
 {
     public class CD_Rol
-    {/*OBETNER USUARIOS*/
+    {/*OBETNER ROL*/
 
         public static List<Rol> ObtenerRoles()
         {
