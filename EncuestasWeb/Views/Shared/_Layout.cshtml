@@ -31,7 +31,7 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
-                    <a href="#">pro sidebar</a>
+                    <a href="#">GENERADOR DE ENCUESTAS</a>
                     <div id="close-sidebar">
                         <i class="fas fa-times"></i>
                     </div>
@@ -97,23 +97,20 @@
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-shopping-cart"></i>
+                                <i class="fas fa-landmark"></i>
                                 <span>Organización</span>
-                                <span class="badge badge-pill badge-danger">3</span>
+                                <span class="badge badge-pill badge-danger"></span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">
-                                            Eje Organizativo
-
-                                        </a>
+                                        <a class="nav-link" name="geografia" href="@Url.Action("Index","EjePrincipal")"><i class="fas fa-bezier-curve"></i> Eje Organizativo</a>
+                                    <li>
+                                        <a class="nav-link" name="geografia" href="@Url.Action("Index","Geografia")"><i class="fas fa-map-marker"></i> Geografia</a>
+                                        <i class=""></i>
                                     </li>
                                     <li>
-                                        <a class="nav-link" name="roles" href="@Url.Action("Index","Geografia")"><i class="fas fa-user-friends"></i> Geografia</a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" name="roles" href="@Url.Action("Index","Perfil")"><i class="fas fa-user-friends"></i> Perfiles</a>
+                                        <a class="nav-link" name="roles" href="@Url.Action("Index","Perfil")"><i class="fas fa-user-cog"></i> Perfiles</a>
                                     </li>
 
                                 </ul>
@@ -216,33 +213,6 @@
             crossorigin="anonymous"></script>
     <!--FIN NUEVA-->
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" name="roles" href="@Url.Action("Index","Rol")"><i class="fas fa-user-friends"></i> Roles</a>
-                    </li>
-
-
-
-                </ul>
-            </div>
-        </div>
-    </div>
     <div class="container body-content">
 
         <hr />
@@ -292,7 +262,14 @@
 
     <script type="text/javascript">
 
-        $.extend({ MisUrls: { url: {}, urls: function (a) { $.extend($.MisUrls.url, a); } } });
+        $.extend({
+            MisUrls: {
+                url: {}, urls: function (a)
+                {
+                    $.extend($.MisUrls.url, a);
+                }
+            }
+        });
 
         //CONTROLADOR ROLES
         $.MisUrls.urls({ Url_ObtenerRoles: '@Url.Action("Obtener", "Rol")' });
@@ -304,10 +281,17 @@
         $.MisUrls.urls({ Url_GuardarPerfil: '@Url.Action("Guardar", "Perfil")' });
         $.MisUrls.urls({ Url_EliminarPerfil: '@Url.Action("Eliminar", "Perfil")' });
 
-        //CONTROLADOR Geografia
+        //CONTROLADOR Geografia JS CON CONTROLADOR
         $.MisUrls.urls({ Url_ObtenerGeografia: '@Url.Action("Obtener", "Geografia")' });
         $.MisUrls.urls({ Url_GuardarGeografia: '@Url.Action("Guardar", "Geografia")' });
         $.MisUrls.urls({ Url_EliminarGeografia: '@Url.Action("Eliminar", "Geografia")' });
+        $.MisUrls.urls({ Url_ObtenerHijosGeografia: '@Url.Action("ObtenerHijos", "Geografia")' }); //MIRAR PARA QUE SE VEA BIEN
+
+         //CONTROLADOR Eje Principal
+        $.MisUrls.urls({ Url_ObtenerEjePrincipal: '@Url.Action("Obtener", "EjePrincipal")' });
+        $.MisUrls.urls({ Url_GuardarEjePrincipal: '@Url.Action("Guardar", "EjePrincipal")' });
+        $.MisUrls.urls({ Url_EliminarEjePrincipal: '@Url.Action("Eliminar", "EjePrincipal")' });
+        $.MisUrls.urls({ Url_ObtenerHijosEjePrincipal: '@Url.Action("ObtenerHijos", "EjePrincipal")'}); //MIRAR PARA QUE SE VEA BIEN
 
 
         //lenguaje español datatable
@@ -315,36 +299,7 @@
 
     </script>
     <!--ESTO NO HARÍA FALTA-->
-    <script>
-        function activarMenu(menuactivo) {
-
-            var ul = $("ul.navbar-nav");
-            ul.find("li.nav-item").each(function (i, li) {
-
-                var a;
-
-                if ($(li).find("div.dropdown-menu").length != 0) {
-
-                    var div = $($(li).find("div.dropdown-menu"))
-                    div.find("a.dropdown-item").each(function (x, tagA) {
-                        if ($(tagA).attr("name") == menuactivo) {
-                            $(li).addClass("active");
-                            return false;
-                        }
-                    })
-                    return false;
-                } else {
-
-                    a = $(li).find("a.nav-link");
-
-                    if ($(a).attr("name") == menuactivo) {
-                        $(li).addClass("active");
-                        return false;
-                    }
-                }
-            });
-        }
-    </script>
+    
     <!--ESTO NO HARÍA FALTA FIN-->
     @RenderSection("scripts", required: false)
 </body>

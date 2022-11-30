@@ -6,30 +6,37 @@ $(document).ready(function () {
     ////validamos el formulario
     $("#formNivel").validate({
         rules: {
-            Pais: "required",
-            CoordenadasX: "required",
-            CoordenadasY: "required"
+            RefEje: "required",
+            Nivel: "required",
+            Nombre: "required",
+            IdPerfil: "required",
+            IdGeografia: "required"
         },
         messages: {
-            Pais: "(*)",
-            CoordenadasX: "(*)",
-            CoordenadasY: "(*)"
+            RefEje: "(*)",
+            Nivel: "(*)",
+            Nombre: "(*)",
+            IdPerfil: "(*)",
+            IdGeografia: "(*)"
         },
         errorElement: 'span'
     });
 
     tabladata = $('#tbdata').DataTable({ /*genera un objeto tabledata con el id indicado*/
         "ajax": { //ajax es una interfaz que transforma los datos en formato json en este caso
-            "url": $.MisUrls.url.Url_ObtenerGeografia, //le damos la url que va ir al controlador
+            "url": $.MisUrls.url.Url_ObtenerEjePrincipal, //le damos la url que va ir al controlador
             "type": "GET",
             "datatype": "json"//le decimos el tipo
         },
         "columns": [ //le decimos qué columnas queremos mostrar
-            { "data": "Pais" },//lo que tenemos en ddbb
-            { "data": "CoordenadasX" },
-            { "data": "CoordenadasY" },
+            { "data": "RefEje" },//lo que tenemos en ddbb
+            { "data": "Nivel" },
+            { "data": "Nombre" },
+            { "data": "IdEjePadre" },
+            { "data": "IdPerfil" },
+            { "data": "IdGeografia" },
             {
-                "data": "IdGeografia", "render": function (data, type, row, meta) {
+                "data": "IdEje", "render": function (data, type, row, meta) {
                     return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
                         "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>" +
                         "<button class='btn btn-primary btn-sm ml-2' type='button' onclick='muestraHijos(" + data + ")'><i class='fas fa-forward'></i></button>"
@@ -51,15 +58,21 @@ function abrirPopUpForm(json) {
 
     if (json != null) {
 
-        $("#txtid").val(json.IdGeografia);
-        $("#txtpais").val(json.Pais);
-        $("#txtcoordenadasx").val(json.CoordenadasX);
-        $("#txtcoordenadasy").val(json.CoordenadasY);
+        $("#txtid").val(json.IdEje);
+        $("#txtrefeje").val(json.RefEje);
+        $("#txtnivel").val(json.Nivel);
+        $("#txtnombre").val(json.Nombre);
+        $("#txtidejepadre").val(json.IdEjePadre);
+        $("#txtidperfil").val(json.IdPerfil);
+        $("#txtidgeografia").val(json.IdGeografia);
 
     } else {
-        $("#txtpais").val("");
-        $("#txtcoordenadasx").val("");
-        $("#txtcoordenadasy").val("");
+        $("#txtrefeje").val("");
+        $("#txtnivel").val("");
+        $("#txtnombre").val("");
+        $("#txtidejepadre").val("");
+        $("#txtidperfil").val("");
+        $("#txtidgeografia").val("");
     }
 
     $('#FormModal').modal('show');
@@ -72,15 +85,18 @@ function Guardar() {
 
         var request = {
             objeto: {
-                IdGeografia: $("#txtid").val(),
-                Pais: $("#txtpais").val(),
-                CoordenadasX: $("#txtcoordenadasx").val(),
-                CoordenadasY: $("#txtcoordenadasy").val()
+                IdEje: $("#txtid").val(),
+                RefEje: $("#txtrefeje").val(),
+                Nivel: $("#txtnivel").val(),
+                Nombre: $("#txtnombre").val(),
+                IdEjePadre: $("#txtidejepadre").val(),
+                IdPerfil: $("#txtidperfil").val(),
+                IdGeografia: $("#txtidgeografia").val()
             }
         }
 
         jQuery.ajax({
-            url: $.MisUrls.url.Url_GuardarGeografia,
+            url: $.MisUrls.url.Url_GuardarEjePrincipal,
             type: "POST",
             data: JSON.stringify(request),
             dataType: "json",
@@ -111,7 +127,7 @@ function Guardar() {
 function eliminar($id) {
     swal({
         title: "Mensaje",
-        text: "¿Desea eliminar el pais seleccionado?",
+        text: "¿Desea eliminar el RefEje seleccionado?",
         type: "warning",
         showCancelButton: true,
 
@@ -125,7 +141,7 @@ function eliminar($id) {
 
         function () {
             jQuery.ajax({
-                url: $.MisUrls.url.Url_EliminarGeografia + "?id=" + $id,
+                url: $.MisUrls.url.Url_EliminarEjePrincipal + "?id=" + $id,
                 type: "GET",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
@@ -134,7 +150,7 @@ function eliminar($id) {
                     if (data.resultado) {
                         tabladata.ajax.reload();
                     } else {
-                        swal("Mensaje", "No se pudo eliminar la geografia", "warning")
+                        swal("Mensaje", "No se pudo eliminar la EjePrincipal", "warning")
                     }
                 },
                 error: function (error) {
@@ -151,18 +167,21 @@ function muestraHijos($id) {
 
     tabladata2 = $('#tbdatahijos').DataTable({
         "ajax": {
-            "url": $.MisUrls.url.Url_ObtenerHijosGeografia + "?id=" + $id,
+            "url": $.MisUrls.url.Url_ObtenerHijosEjePrincipal + "?id=" + $id,
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "Pais" },
-            { "data": "CoordenadasX" },
-            { "data": "CoordenadasY" },
+            { "data": "RefEje" },
+            { "data": "Nivel" },
+            { "data": "Nombre" },
+            { "data": "IdEjePadre" },
+            { "data": "IdPerfil" },
+            { "data": "IdGeografia" },
             {
-                "data": "IdGeografia", "render": function (data, type, row, meta) {
+                "data": "IdEje", "render": function (data, type, row, meta) {
                     return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
-                        "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>" 
+                        "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>"
                 },
                 "orderable": false,
                 "searchable": false,
@@ -173,9 +192,4 @@ function muestraHijos($id) {
             "url": $.MisUrls.url.Url_datatable_spanish
         }
     });
-
-
-    
-
-
 }

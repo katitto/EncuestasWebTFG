@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaDatos;
+using CapaModelo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +26,16 @@ namespace EncuestasWeb.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult GeografiaNested()
+        {
+            List<Geografia> list = new List<Geografia>();
+            {
+                
+
+            }
             return View();
         }
     }

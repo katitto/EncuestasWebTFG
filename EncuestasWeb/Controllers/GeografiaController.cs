@@ -15,6 +15,10 @@ namespace EncuestasWeb.Controllers
         {
             return View();
         }
+        public ActionResult TablaJS2()
+        {
+            return View();
+        }
         //OBTIENE LISTA DE Geografia
         public JsonResult Obtener()
 
@@ -49,6 +53,17 @@ namespace EncuestasWeb.Controllers
             bool respuesta = CD_Geografia.EliminarGeografia(id);
 
             return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ObtenerHijos(int id = 0)
+        {
+            List<Geografia> oListaGeografia = CD_Geografia.ObtenerHijosGeografia(id);
+            return Json(new { data = oListaGeografia }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ObtenerTablaNested()
+        {
+            List<Geografia> oListaGeografia = CD_Geografia.ObtenerGeografia();
+            return Json(oListaGeografia , JsonRequestBehavior.AllowGet);
         }
 
     }

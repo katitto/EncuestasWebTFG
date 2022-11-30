@@ -12,6 +12,7 @@ namespace CapaModelo
         public string Pais { get; set; }
         public decimal CoordenadasX { get; set; }
         public decimal CoordenadasY { get; set; }
+        public int Padre { get; set; }
 
     }
 }
