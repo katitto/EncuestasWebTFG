@@ -1988,7 +1988,7 @@
     <Content Include="Scripts\Views\Geografia_Index.js" />
     <Content Include="Scripts\Views\Perfil_Index2.js" />
     <Content Include="Scripts\Views\Rol_Index.js" />
-    <Content Include="Scripts\Views\TablaNested_Index.js" />
+    <Content Include="Scripts\Views\TablaJS_Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2016,9 +2016,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Geografia\Index.cshtml" />
-    <Content Include="Views\Geografia\TablaJS.cshtml" />
     <Content Include="Views\EjePrincipal\Index.cshtml" />
-    <Content Include="Views\Geografia\TablaJS2.cshtml" />
+    <Content Include="Views\Geografia\TablaJSK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

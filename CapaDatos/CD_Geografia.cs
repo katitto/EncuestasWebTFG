@@ -31,15 +31,25 @@ namespace CapaDatos
                             IdGeografia = Convert.ToInt32(dr["IdGeografia"].ToString()),
                             Pais = dr["Pais"].ToString(),
                             CoordenadasX = Convert.ToDecimal(dr["CoordenadasX"].ToString()),
-                            CoordenadasY = Convert.ToDecimal(dr["CoordenadasY"].ToString())
-                        }); ;
+                            CoordenadasY = Convert.ToDecimal(dr["CoordenadasY"].ToString()),
+                            Padre = Convert.ToDecimal(dr["Padre"].ToString())
+
+                        });
+                        
                     }
+                    
                     dr.Close();
                     return rptListaGeografia;
                 }
                 catch (Exception ex)
                 {
-                    rptListaGeografia = null;
+                   if(rptListaGeografia == null)
+                    { 
+                    for (int i = 0; i < rptListaGeografia.Count; i++)
+                    {
+                        
+                    }
+                    }
                     return rptListaGeografia;
                 }
             }
@@ -172,5 +182,38 @@ namespace CapaDatos
                 }
             }
         }
+        public static List<Geografia> ObtenerBusquedaGeografia(string Pais)
+        {
+            List<Geografia> rptListaGeografia = new List<Geografia>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    
+                    SqlCommand cmd = new SqlCommand("usp_ObtenerBusquedaGeografia", oConexion);
+                    cmd.Parameters.AddWithValue("Pais", Pais);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    oConexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    
+                    while (dr.Read())
+                    {
+                        rptListaGeografia.Add(new Geografia()
+                        {
+                            Pais = dr["Pais"].ToString()
+
+                        }); 
+                    }
+                    dr.Close();
+                    return rptListaGeografia;
+                }
+                catch (Exception ex)
+                {
+                    rptListaGeografia = null;
+                    return rptListaGeografia;
+                }
+            }
+        }
+
     }
 }
