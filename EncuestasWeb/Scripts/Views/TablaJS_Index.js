@@ -1,7 +1,13 @@
-﻿/*/*$.get("Geografia/ObtenerTablaNested", function (data) {*/*/
+﻿/*/*$.get("Geografia/ObtenerTablaNested", function (data) {*/
     /*Creación de la funcionalidad de buscador*/
-    alert("hola updated");
-    /*crearLista(data);*/
+$(document).ready(function () {
+    var contenido = "";
+    var nombre = " hola katito"
+    var contenido = "<h1>"+ nombre+ "</h1>";
+    document.getElementById("divTabla").innerHTML = contenido;
+});
+    /*creamos un DOm para llegar a la tabla por el id. formar contenidohtml y luego meter en el div*/
+/*    crearLista(data);*/
 
 
     /*separamos padres de hijos*/
