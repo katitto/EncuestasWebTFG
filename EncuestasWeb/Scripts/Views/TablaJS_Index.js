@@ -26,7 +26,7 @@ $.get("Geografia/ObtenerTablaNested", function (data) {
         let geografia = JSON.parse(geografiaData);
 
         //8. SI EL PADRE ES = CERO QUIERE DECIR QUE ES PADRE LLENAMOS ARRAY PADRES E HIJOS
-        if (geografia.Padre == 0) {          
+        if (geografia.Padre == 0) {
             ArrayPadres.push(geografia);
 
         } else {
@@ -37,7 +37,7 @@ $.get("Geografia/ObtenerTablaNested", function (data) {
 
     //10. creamos html para enviar a la view
     var contenido = "";
-    contenido += "<table id = 'tablaGeografia'class= 'table'>";
+    contenido += "<table id = 'tablaGeografia' class= 'table'>";
     contenido += "<thead>";
     contenido += "<tr>";
     contenido += "<td> Id</td>";
@@ -57,13 +57,11 @@ $.get("Geografia/ObtenerTablaNested", function (data) {
         contenido += "<td>" + ArrayPadres[j].CoordenadasY + "</td>";
         contenido += "<td>" + ArrayPadres[j].Padre + "</td>";
         contenido += "</tr>";
-        
-        for (var k = 0; k < ArrayHijos.length; k++)
-        {   //11.CREAMOS LA SUB TABLA
-           
 
-            if (ArrayHijos[k].Padre == ArrayPadres[j].IdGeografia)
-            {
+        for (var k = 0; k < ArrayHijos.length; k++) {   //11.CREAMOS LA SUB TABLA
+
+
+            if (ArrayHijos[k].Padre == ArrayPadres[j].IdGeografia) {
                 contenido += "<tr>";
                 contenido += "<td>" + ArrayHijos[k].IdGeografia + "</td>";
                 contenido += "<td>" + ArrayHijos[k].Pais + "</td>";
@@ -80,12 +78,13 @@ $.get("Geografia/ObtenerTablaNested", function (data) {
     contenido += "</table>";
 
     document.getElementById("divTabla").innerHTML = contenido;
+    //$("#tablaGeografia").dataTable({
 
 
+
+    //});
 
 });
-
-
     /*funcionalidad boton*/
 var btnBuscar = document.getElementById("btnBuscar");
 btnBuscar.onclick = function () {

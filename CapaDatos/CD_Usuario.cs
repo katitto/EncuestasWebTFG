@@ -9,14 +9,14 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class CD_Usuario
+   public class CD_Usuario
     {
         public static List<Usuario> ObtenerUsuarios()
         {
             List<Usuario> rptListaUsuario = new List<Usuario>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
-                SqlCommand cmd = new SqlCommand("usp_ObtenerUsuarios", oConexion);
+                SqlCommand cmd = new SqlCommand("usp_ObtenerUsuario", oConexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
@@ -32,7 +32,7 @@ namespace CapaDatos
                             Nombre = dr["Nombre"].ToString(),
                             Apellido = dr["Apellido"].ToString(),
                             User = dr["User"].ToString(),
-                            Contrasena = dr["Contraseña"].ToString(),
+                            Contrasena = dr["Contrasena"].ToString(),
                             Email = dr["Email"].ToString(),
                             IdEje = Convert.ToInt32(dr["IdEje"].ToString()),
                             IdRol = Convert.ToInt32(dr["IdRol"].ToString())
@@ -49,6 +49,97 @@ namespace CapaDatos
                     return rptListaUsuario;
                 }
             }
+        }
+
+        public static bool RegistrarUsuario(Usuario objeto)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_RegistrarUsuario", oConexion);
+                    cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", objeto.Apellido);
+                    cmd.Parameters.AddWithValue("User", objeto.User);
+                    cmd.Parameters.AddWithValue("Contrasena", objeto.Contrasena);
+                    cmd.Parameters.AddWithValue("Email", objeto.Contrasena);
+                    cmd.Parameters.AddWithValue("IdEje", objeto.IdEje);
+                    cmd.Parameters.AddWithValue("IdRol", objeto.IdRol);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+            }
+
+            return respuesta;
+        }
+
+        public static bool ModificarUsuario(Usuario usu)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_ModificarUsuario", oConexion);
+                    cmd.Parameters.AddWithValue("Nombre", usu.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", usu.Apellido);
+                    cmd.Parameters.AddWithValue("User", usu.User);
+                    cmd.Parameters.AddWithValue("Contrasena", usu.Contrasena);
+                    cmd.Parameters.AddWithValue("Email ", usu.Email);
+                    cmd.Parameters.AddWithValue("IdEje", usu.IdEje);
+                    cmd.Parameters.AddWithValue("IdRol", usu.IdRol);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    oConexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+            }
+
+            return respuesta;
+        }
+
+        public static bool EliminarUsuario(int IdUsuario)
+        {
+            bool respuesta = true;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_EliminarUsuario", oConexion);
+                    cmd.Parameters.AddWithValue("IdUsuario", IdUsuario);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    oConexion.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    respuesta = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+
+                }
+                catch (Exception ex)
+                {
+                    respuesta = false;
+                }
+
+            }
+
+            return respuesta;
         }
     }
 }

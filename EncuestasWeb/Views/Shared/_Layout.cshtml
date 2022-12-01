@@ -124,7 +124,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Usuarios</a>
+                                        <a class="nav-link" name="usuario" href="@Url.Action("Index","Usuario")"><i class="fas fa-user-friends"></i> Usuarios</a>
                                     </li>
                                     <li>
                                         <a class="nav-link" name="roles" href="@Url.Action("Index","Rol")"><i class="fas fa-user-friends"></i> Roles</a>
@@ -187,19 +187,12 @@
                 <footer class="text-center">
                     <div class="mb-2">
                         <small>
-                            © 2020 made with <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="https://azouaoui.netlify.com">
-                                Mohamed Azouaoui
+                            © 2022 using bootstrap <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="">
+                                
                             </a>
                         </small>
                     </div>
-                    <div>
-                        <a href="https://github.com/azouaoui-med" target="_blank">
-                            <img alt="GitHub followers" src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social" />
-                        </a>
-                        <a href="https://twitter.com/azouaoui_med" target="_blank">
-                            <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social" />
-                        </a>
-                    </div>
+
                 </footer>
             </div>
         </main>
@@ -293,6 +286,10 @@
         $.MisUrls.urls({ Url_EliminarEjePrincipal: '@Url.Action("Eliminar", "EjePrincipal")' });
         $.MisUrls.urls({ Url_ObtenerHijosEjePrincipal: '@Url.Action("ObtenerHijos", "EjePrincipal")'}); //MIRAR PARA QUE SE VEA BIEN
 
+        //CONTROLADOR USUARIOS
+        $.MisUrls.urls({ Url_ObtenerUsuarios: '@Url.Action("Obtener", "Usuario")' });
+        $.MisUrls.urls({ Url_GuardarUsuario: '@Url.Action("Guardar", "Usuario")' });
+        $.MisUrls.urls({ Url_EliminarUsuario: '@Url.Action("Eliminar", "Usuario")' });
 
         //lenguaje español datatable
         $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });
