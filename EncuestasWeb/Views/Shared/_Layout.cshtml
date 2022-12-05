@@ -104,9 +104,9 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a class="nav-link" name="geografia" href="@Url.Action("Index","EjePrincipal")"><i class="fas fa-bezier-curve"></i> Eje Organizativo</a>
+                                        <a class="nav-link" name="ejePrincipal" href="@Url.Action("Index","EjePrincipal")"><i class="fas fa-bezier-curve"></i> Eje Organizativo</a>
                                     <li>
-                                        <a class="nav-link" name="geografia" href="@Url.Action("Index","Geografia")"><i class="fas fa-map-marker"></i> Geografia</a>
+                                        <a class="nav-link" name="geografia" href="@Url.Action("TablaJSK","Geografia")"><i class="fas fa-map-marker"></i> Geografia</a>
                                         <i class=""></i>
                                     </li>
                                     <li>
@@ -275,11 +275,10 @@
         $.MisUrls.urls({ Url_EliminarPerfil: '@Url.Action("Eliminar", "Perfil")' });
 
         //CONTROLADOR Geografia JS CON CONTROLADOR
-        $.MisUrls.urls({ Url_ObtenerGeografia: '@Url.Action("Obtener", "Geografia")' });
+        $.MisUrls.urls({ Url_ObtenerGeografia: '@Url.Action("ObtenerTablaNested", "Geografia")' });
         $.MisUrls.urls({ Url_GuardarGeografia: '@Url.Action("Guardar", "Geografia")' });
         $.MisUrls.urls({ Url_EliminarGeografia: '@Url.Action("Eliminar", "Geografia")' });
-        $.MisUrls.urls({ Url_ObtenerHijosGeografia: '@Url.Action("ObtenerHijos", "Geografia")' }); //MIRAR PARA QUE SE VEA BIEN
-
+        $.MisUrls.urls({ Url_ObtenerPadresGeografia: '@Url.Action("ObtenerPadres", "Geografia")' }); //MIRAR PARA QUE SE VEA BIEN
          //CONTROLADOR Eje Principal
         $.MisUrls.urls({ Url_ObtenerEjePrincipal: '@Url.Action("Obtener", "EjePrincipal")' });
         $.MisUrls.urls({ Url_GuardarEjePrincipal: '@Url.Action("Guardar", "EjePrincipal")' });

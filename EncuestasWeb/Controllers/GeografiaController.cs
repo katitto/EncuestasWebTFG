@@ -19,6 +19,10 @@ namespace EncuestasWeb.Controllers
         {
             return View();
         }
+        public ActionResult ComboBoxJS()
+        {
+            return View();
+        }
         //OBTIENE LISTA DE Geografia
         public JsonResult Obtener()
 
@@ -55,9 +59,9 @@ namespace EncuestasWeb.Controllers
             return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ObtenerHijos(int id = 0)
+        public JsonResult ObtenerPadres()
         {
-            List<Geografia> oListaGeografia = CD_Geografia.ObtenerHijosGeografia(id);
+            List<Geografia> oListaGeografia = CD_Geografia.ObtenerPadresGeografia();
             return Json(oListaGeografia, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ObtenerTablaNested()

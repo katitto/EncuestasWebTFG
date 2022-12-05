@@ -1988,6 +1988,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\Views\EjePrincipal_Index.js" />
     <Content Include="Scripts\Views\Geografia_Index.js" />
+    <Content Include="Scripts\Views\LlenarComboBox.js" />
     <Content Include="Scripts\Views\Perfil_Index2.js" />
     <Content Include="Scripts\Views\Rol_Index.js" />
     <Content Include="Scripts\Views\TablaJS_Index.js" />
@@ -2023,6 +2024,7 @@
     <Content Include="Views\Geografia\TablaJSK.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Geografia\ComboBoxJS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
