@@ -20,6 +20,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/PluginsCSS")
     @RenderSection("estilos", required: false)
+
+
 </head>
 <body>
 
@@ -43,12 +45,12 @@
                     </div>
                     <div class="user-info">
                         <span class="user-name">
-                            Jhon
-                            <strong>Smith</strong>
+                            <strong id="txtnombreusuario"></strong>
                         </span>
-                        <span class="user-role">Administrator</span>
+
+                        <span class="user-role" id="txtrolusuario"></span>
                         <span class="user-status">
-                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle" style="color:green;"></i>
                             <span>Online</span>
                         </span>
                     </div>
@@ -107,7 +109,7 @@
                                         <a class="nav-link" name="ejePrincipal" href="@Url.Action("Index","EjePrincipal")"><i class="fas fa-bezier-curve"></i> Eje Organizativo</a>
                                     <li>
                                         <a class="nav-link" name="geografia" href="@Url.Action("Index","Geografia")"><i class="fas fa-map-marker"></i> Geografia</a>
-                                        
+
                                     </li>
                                     <li>
                                         <a class="nav-link" name="roles" href="@Url.Action("Index","Perfil")"><i class="fas fa-user-cog"></i> Perfiles</a>
@@ -129,7 +131,7 @@
                                     <li>
                                         <a class="nav-link" name="roles" href="@Url.Action("Index","Rol")"><i class="fas fa-user-cog"></i> Roles</a>
                                     </li>
-                            
+
                                 </ul>
                             </div>
                         </li>
@@ -186,7 +188,7 @@
                     <div class="mb-2">
                         <small>
                             14/12/2022 TFG <i class="fa fa-heart" style="color:red"></i> by Kathy and Jorge - <a target="_blank" rel="noopener noreferrer" href="">
-                                
+
                             </a>
                         </small>
                     </div>
@@ -217,6 +219,7 @@
     @Scripts.Render("~/Content/PluginsJS")
 
     <!--bar js-->
+
     <script type="text/javascript">
         $(".sidebar-dropdown > a").click(function () {
             $(".sidebar-submenu").slideUp(200);
@@ -250,6 +253,17 @@
     </script>
 
     <!--fin bar -->
+    <!--Usuario-->
+    <script>
+        $(document).ready(function () {
+            $.get("Login/IndexUsuario", function (data) {
+                var contenido = "";
+                contenido += data.User;
+                document.getElementById("txtnombreusuario").innerHTML = contenido;
+            });
+        });
+    </script>
+    <!--Usuario-->
 
     <script type="text/javascript">
 
@@ -276,7 +290,7 @@
         $.MisUrls.urls({ Url_ObtenerGeografia: '@Url.Action("Obtener", "Geografia")' });
         $.MisUrls.urls({ Url_GuardarGeografia: '@Url.Action("Guardar", "Geografia")' });
         $.MisUrls.urls({ Url_EliminarGeografia: '@Url.Action("Eliminar", "Geografia")' });
- 
+
          //CONTROLADOR Eje Principal
         $.MisUrls.urls({ Url_ObtenerEjePrincipal: '@Url.Action("Obtener", "EjePrincipal")' });
         $.MisUrls.urls({ Url_GuardarEjePrincipal: '@Url.Action("Guardar", "EjePrincipal")' });
@@ -293,7 +307,7 @@
 
     </script>
     <!--ESTO NO HARÍA FALTA-->
-    
+    <!--debe ser siempre el primero Jquery-->
     <!--ESTO NO HARÍA FALTA FIN-->
     @RenderSection("scripts", required: false)
 </body>

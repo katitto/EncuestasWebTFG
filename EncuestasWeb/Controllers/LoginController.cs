@@ -15,6 +15,15 @@ namespace EncuestasWeb.Controllers
         {
             return View();
         }
+        /*sesion usuario*/
+        private static Usuario SesionUsuario;
+        // GET: Usuario
+        public ActionResult IndexUsuario()
+        {
+            SesionUsuario = (Usuario)Session["Usuario"];
+            return Json(SesionUsuario, JsonRequestBehavior.AllowGet);
+        }
+        /*sesion usuario*/
         [HttpPost]
         public ActionResult Index(string correo, string clave)
         {
@@ -28,7 +37,13 @@ namespace EncuestasWeb.Controllers
 
             Session["Usuario"] = ObjUsuario;
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Dashboard");
+        }
+        //obtener datos de usuario conectado y pasarlo para el menú
+        public JsonResult ObtenerUsuarioConectado(string correo, string clave)
+        {
+            Usuario ObjUsuario = CD_Usuario.ObtenerUsuarios().Where(x => x.Email == correo && x.Contrasena == clave).FirstOrDefault();
+            return Json(ObjUsuario, JsonRequestBehavior.AllowGet);
         }
     }
 }
