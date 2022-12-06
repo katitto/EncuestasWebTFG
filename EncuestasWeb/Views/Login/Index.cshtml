@@ -1,10 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
-
-<h2>Index</h2>
-
 <!DOCTYPE html>
 
 <html>
@@ -67,7 +64,7 @@
                                                 <span><img src="@Url.Content("~/Imagenes/votacion1.jfif")" alt="" height="100"></span>
                                             </a>
                                         </div>
-                                        <form action="@Url.Content("~/Login/Index")" method="post" class="p-2">
+                                        <form action="@Url.Content("~/Login/Index")" method="post" class="p-2" >
                                             <div class="form-group">
                                                 <label for="emailaddress">Correo</label>
                                                 <input class="form-control" type="email" name="correo" required="">
@@ -78,7 +75,7 @@
                                             </div>
 
                                             <div class="mb-3 text-center">
-                                                <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
+                                                <button class="btn btn-primary btn-block" type="submit" >Ingresar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -88,7 +85,7 @@
 
                                 <div class="row mt-4">
                                     <div class="col-sm-12 text-center">
-                                        <p style="color:white">Created by Kathy and Jorge </p>
+                                        <p class="text-white-50 mb-0">Created by Kathy and Jorge</p>
                                     </div>
                                 </div>
 

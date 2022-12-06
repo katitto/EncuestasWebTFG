@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "TablaJSK";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 @section estilos{
     <style>
@@ -10,6 +10,57 @@
             font-size: 0.8em;
             font-weight: bold;
         }
+        .content-select select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+            .content-select select::-ms-expand {
+                display: none;
+            }
+        .content-select {
+            max-width: 250px;
+            position: relative;
+        }
+
+            .content-select select {
+                display: inline-block;
+                width: 100%;
+                cursor: pointer;
+                padding: 7px 10px;
+                height: 42px;
+                outline: 0;
+                border: 0;
+                border-radius: 0;
+                color: dimgrey;
+                font-size: 0.95em;
+                color:dimgrey;
+                font-family:Arial;
+                border: 1px solid rgba(0,0,0,0.2);
+                border-radius: 6px;
+                position: relative;
+                transition: all 0.25s ease;
+            }
+                .content-select select:hover {
+                    background: #B1E8CD;
+                }
+            .content-select i {
+                position: absolute;
+                right: 20px;
+                top: calc(50% - 13px);
+                width: 16px;
+                height: 16px;
+                display: block;
+                border-left: 4px solid #2AC176;
+                border-bottom: 4px solid #2AC176;
+                transform: rotate(-45deg); /* Giramos el cuadrado */
+                transition: all 0.25s ease;
+            }
+
+            .content-select:hover i {
+                margin-top: 3px;
+            }
+ 
+
     </style>
 }
 <!--compatble con menú-->
@@ -84,8 +135,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtpadre">Padre<span class="error"></span></label>
-                                <input type="text" class="form-control required" id="txtpadre" name="txtpadre" autocomplete="9%%943511">
-                            </div>
+                                <div class="content-select">
+                                    <select id="cboPadres" class="form-select">
+                                        
+                                    </select>
+                                    <i></i>
+                                </div>
+                                    <input type="text" id="txtpadre" name="txtpadre" autocomplete="9%%943511">
+                                </div>
                         </div>
                     </div>
                 </form>
@@ -103,4 +160,4 @@
 <!--debe ser siempre el primero Jquery-->
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/Views/TablaJS_Index.js"></script>
-
+<link href="~/Content/bootstrap.css" rel="stylesheet" />

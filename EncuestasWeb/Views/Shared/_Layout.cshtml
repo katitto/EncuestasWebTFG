@@ -106,8 +106,8 @@
                                     <li>
                                         <a class="nav-link" name="ejePrincipal" href="@Url.Action("Index","EjePrincipal")"><i class="fas fa-bezier-curve"></i> Eje Organizativo</a>
                                     <li>
-                                        <a class="nav-link" name="geografia" href="@Url.Action("TablaJSK","Geografia")"><i class="fas fa-map-marker"></i> Geografia</a>
-                                        <i class=""></i>
+                                        <a class="nav-link" name="geografia" href="@Url.Action("Index","Geografia")"><i class="fas fa-map-marker"></i> Geografia</a>
+                                        
                                     </li>
                                     <li>
                                         <a class="nav-link" name="roles" href="@Url.Action("Index","Perfil")"><i class="fas fa-user-cog"></i> Perfiles</a>
@@ -127,11 +127,9 @@
                                         <a class="nav-link" name="usuario" href="@Url.Action("Index","Usuario")"><i class="fas fa-user-friends"></i> Usuarios</a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" name="roles" href="@Url.Action("Index","Rol")"><i class="fas fa-user-friends"></i> Roles</a>
+                                        <a class="nav-link" name="roles" href="@Url.Action("Index","Rol")"><i class="fas fa-user-cog"></i> Roles</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Tables</a>
-                                    </li>
+                            
                                 </ul>
                             </div>
                         </li>
@@ -164,18 +162,18 @@
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
                 <a href="#">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge badge-pill badge-warning notification">3</span>
+                    <i class=""></i>
+                    <span class="badge badge-pill badge-warning notification"></span>
                 </a>
                 <a href="#">
-                    <i class="fa fa-envelope"></i>
-                    <span class="badge badge-pill badge-success notification">7</span>
+                    <i class=""></i>
+                    <span class="badge badge-pill badge-success notification"></span>
                 </a>
                 <a href="#">
-                    <i class="fa fa-cog"></i>
-                    <span class="badge-sonar"></span>
+                    <i class=""></i>
+                    <span class=""></span>
                 </a>
-                <a href="#">
+                <a href="@Url.Action("Salir", "DashBoard")">
                     <i class="fa fa-power-off"></i>
                 </a>
             </div>
@@ -187,7 +185,7 @@
                 <footer class="text-center">
                     <div class="mb-2">
                         <small>
-                            © 2022 using bootstrap <i class="fa fa-heart" style="color:red"></i> by - <a target="_blank" rel="noopener noreferrer" href="">
+                            14/12/2022 TFG <i class="fa fa-heart" style="color:red"></i> by Kathy and Jorge - <a target="_blank" rel="noopener noreferrer" href="">
                                 
                             </a>
                         </small>
@@ -206,7 +204,7 @@
             crossorigin="anonymous"></script>
     <!--FIN NUEVA-->
 
-    <div class="container body-content">
+    <div>
 
         <hr />
         <footer>
@@ -275,10 +273,10 @@
         $.MisUrls.urls({ Url_EliminarPerfil: '@Url.Action("Eliminar", "Perfil")' });
 
         //CONTROLADOR Geografia JS CON CONTROLADOR
-        $.MisUrls.urls({ Url_ObtenerGeografia: '@Url.Action("ObtenerTablaNested", "Geografia")' });
+        $.MisUrls.urls({ Url_ObtenerGeografia: '@Url.Action("Obtener", "Geografia")' });
         $.MisUrls.urls({ Url_GuardarGeografia: '@Url.Action("Guardar", "Geografia")' });
         $.MisUrls.urls({ Url_EliminarGeografia: '@Url.Action("Eliminar", "Geografia")' });
-        $.MisUrls.urls({ Url_ObtenerPadresGeografia: '@Url.Action("ObtenerPadres", "Geografia")' }); //MIRAR PARA QUE SE VEA BIEN
+ 
          //CONTROLADOR Eje Principal
         $.MisUrls.urls({ Url_ObtenerEjePrincipal: '@Url.Action("Obtener", "EjePrincipal")' });
         $.MisUrls.urls({ Url_GuardarEjePrincipal: '@Url.Action("Guardar", "EjePrincipal")' });

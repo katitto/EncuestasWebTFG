@@ -82,7 +82,7 @@ namespace CapaDatos
             return respuesta;
         }
 
-        public static bool ModificarUsuario(Usuario usu)
+        public static bool ModificarUsuario(Usuario objeto)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
@@ -90,13 +90,14 @@ namespace CapaDatos
                 try
                 {
                     SqlCommand cmd = new SqlCommand("usp_ModificarUsuario", oConexion);
-                    cmd.Parameters.AddWithValue("Nombre", usu.Nombre);
-                    cmd.Parameters.AddWithValue("Apellido", usu.Apellido);
-                    cmd.Parameters.AddWithValue("User", usu.User);
-                    cmd.Parameters.AddWithValue("Contrasena", usu.Contrasena);
-                    cmd.Parameters.AddWithValue("Email ", usu.Email);
-                    cmd.Parameters.AddWithValue("IdEje", usu.IdEje);
-                    cmd.Parameters.AddWithValue("IdRol", usu.IdRol);
+                    cmd.Parameters.AddWithValue("IdUsuario", objeto.IdUsuario);
+                    cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", objeto.Apellido);
+                    cmd.Parameters.AddWithValue("User", objeto.User);
+                    cmd.Parameters.AddWithValue("Contrasena", objeto.Contrasena);
+                    cmd.Parameters.AddWithValue("Email ", objeto.Email);
+                    cmd.Parameters.AddWithValue("IdEje", objeto.IdEje);
+                    cmd.Parameters.AddWithValue("IdRol", objeto.IdRol);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();

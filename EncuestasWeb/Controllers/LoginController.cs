@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaDatos;
+using CapaModelo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +14,21 @@ namespace EncuestasWeb.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Index(string correo, string clave)
+        {
+            Usuario ObjUsuario = CD_Usuario.ObtenerUsuarios().Where(x => x.Email == correo && x.Contrasena == clave).FirstOrDefault();
+
+            if (ObjUsuario == null)
+            {
+                ViewBag.Error = "Usuario o contraseña no correcta";
+                return View();
+            }
+
+            Session["Usuario"] = ObjUsuario;
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

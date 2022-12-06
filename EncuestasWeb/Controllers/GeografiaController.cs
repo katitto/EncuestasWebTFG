@@ -15,10 +15,7 @@ namespace EncuestasWeb.Controllers
         {
             return View();
         }
-        public ActionResult TablaJSK()
-        {
-            return View();
-        }
+
         public ActionResult ComboBoxJS()
         {
             return View();
@@ -30,7 +27,17 @@ namespace EncuestasWeb.Controllers
             List<Geografia> oListaGeografia = CD_Geografia.ObtenerGeografia();
             return Json(new { data = oListaGeografia }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ObtenerPadres()
+        {
+            List<Geografia> oListaGeografia = CD_Geografia.ObtenerPadresGeografia();
+            return Json(oListaGeografia, JsonRequestBehavior.AllowGet);
+        }
 
+        public JsonResult ObtenerTablaNested()
+        {
+            List<Geografia> oListaGeografia = CD_Geografia.ObtenerGeografia();
+            return Json(oListaGeografia, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public JsonResult Guardar(Geografia objeto)
@@ -57,18 +64,7 @@ namespace EncuestasWeb.Controllers
             bool respuesta = CD_Geografia.EliminarGeografia(id);
 
             return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult ObtenerPadres()
-        {
-            List<Geografia> oListaGeografia = CD_Geografia.ObtenerPadresGeografia();
-            return Json(oListaGeografia, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult ObtenerTablaNested()
-        {
-            List<Geografia> oListaGeografia = CD_Geografia.ObtenerGeografia();
-            return Json(oListaGeografia , JsonRequestBehavior.AllowGet);
-        }
+        }      
         public JsonResult ObtenerBusqueda(string pais)
         {
             List<Geografia> oListaGeografia = CD_Geografia.ObtenerBusquedaGeografia(pais);

@@ -20,9 +20,7 @@ $(document).ready(function () {
     //pasamos a Json el array ordenado 
 
     $.get("Geografia/ObtenerTablaNested", function (data) {
-            jQuery.ajax({
-                url: $.MisUrls.url.Url_ObtenerGeografia
-            });
+
         //2. TENEMOS DATA QUE EL JSON DEL CONTROLADOR EN ESE FORMATO
         //3. VAMOS A TRANSFORMAR ESOS DATOS EN VARIABLES QUE PUEDA LEER EL JS, ADEMÁS QUIERO QUE APAREZCAS LOS HIJOS EN OTRA TABLA
         //4. CREAMOS VARIABLE 2 ARRAY PARA PADRES E HIJOS
@@ -119,13 +117,19 @@ function abrirPopUpForm(json) {
         $("#txtpais").val(json.Pais);
         $("#txtcoordenadasx").val(json.CoordenadasX);
         $("#txtcoordenadasy").val(json.CoordenadasY);
-        $("#txtpadre").val(json.Padre);
-
+        $("#txtpadre").val(json.Padre);       
+        //pasamos tipo objet a variable js
+        /*Nos traermos el valor del json*/
+        cargaCombo(json.Padre);
+ 
+        
     } else {
         $("#txtpais").val("");
         $("#txtcoordenadasx").val("");
         $("#txtcoordenadasy").val("");
+        /*cambios*/
         $("#txtpadre").val("");
+        cargaCombo("");
     }
 
     $('#FormModal').modal('show');
@@ -133,17 +137,19 @@ function abrirPopUpForm(json) {
 }
 
 function Guardar() {
-     
-
-    if ($("#formNivel").valid()) {
-
+  if ($("#formNivel").valid()) {
+      alert($("#cboPadres").val());
         var request = {
             objeto: {
                 IdGeografia: $("#txtid").val(),
                 Pais: $("#txtpais").val(),
                 CoordenadasX: $("#txtcoordenadasx").val(),
                 CoordenadasY: $("#txtcoordenadasy").val(),
-                Padre: $("#txtpadre").val()
+                Padre: $("#cboPadres").val()//pasamos a recoger el valor del select
+                /*al guardar tenemos que coger el valor del select*/
+                
+                
+
             }
         }
 
@@ -381,39 +387,20 @@ function eliminar($id) {
             });
         });
 }
-
-//function muestraHijos($id) {
-
-//    tabladata2 = $('#tbdatahijos').DataTable({
-//        "ajax": {
-//            "url": $.MisUrls.url.Url_ObtenerHijosGeografia + "?id=" + $id,
-//            "type": "GET",
-//            "datatype": "json"
-//        },
-//        "columns": [
-//            { "data": "Pais" },
-//            { "data": "CoordenadasX" },
-//            { "data": "CoordenadasY" },
-//            { "data": "Padre" },
-//            {
-//                "data": "IdGeografia", "render": function (data, type, row, meta) {
-//                    return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
-//                        "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>"
-//                },
-//                "orderable": false,
-//                "searchable": false,
-//                "width": "90px"
-//            }
-//        ],
-//        "language": {
-//            "url": $.MisUrls.url.Url_datatable_spanish
-//        }
-//    });
-
-
-
-
-
-//}
-
-
+/*CARGA COMBO*/
+/**/
+function cargaCombo(id) {
+    $.get("Geografia/ObtenerPadres", function (data) {
+        var contenido = "";
+        var nfilas = Object.keys(data).length;
+        contenido += "<option value='0'>TOP";
+        //cargar el combo
+        for (var i = 0; i < nfilas; i++) {               
+                contenido += "<option value='" + data[i].IdGeografia + "'>"
+                contenido += data[i].Pais;
+                contenido += "</option>"       
+        }
+        document.getElementById("cboPadres").innerHTML = contenido;
+        document.getElementById("cboPadres").value =  id ;
+    });
+}

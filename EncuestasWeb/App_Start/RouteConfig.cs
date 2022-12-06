@@ -16,7 +16,7 @@ namespace EncuestasWeb
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Geografia", action = "TablaJSK" +
+                defaults: new { controller = "Login", action = "Index" +
                 "", id = UrlParameter.Optional }
             );
         }
