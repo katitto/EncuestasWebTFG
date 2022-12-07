@@ -114,8 +114,6 @@ $(document).ready(function () {
 
 
  function eliminar($id) {
-
-
             swal({
                 title: "Mensaje",
                 text: "¿Desea eliminar el rol seleccionado?",

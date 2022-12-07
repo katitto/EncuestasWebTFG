@@ -16,7 +16,7 @@ namespace CapaDatos
             List<EjePrincipal> rptListaEjePrincipal = new List<EjePrincipal>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
-                SqlCommand cmd = new SqlCommand("usp_ObtenerEjePrincipal", oConexion);
+                SqlCommand cmd = new SqlCommand("usp_ObtenerEjesRel", oConexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
@@ -32,8 +32,15 @@ namespace CapaDatos
                             RefEje = dr["RefEje"].ToString(),
                             Nivel = Convert.ToInt32(dr["Nivel"].ToString()),
                             Nombre = dr["Nombre"].ToString(),
-                            IdPerfil = Convert.ToInt32(dr["IdPerfil"].ToString()),
-                            IdGeografia = Convert.ToInt32(dr["IdGeografia"].ToString())
+                            IdEjePadre = Convert.ToInt32(dr["IdEjePadre"].ToString()),
+                            oPerfil = new Perfil() { 
+                                IdPerfil = Convert.ToInt32(dr["IdPerfil"].ToString()),
+                                Descripcion = dr["Descripcion"].ToString()
+                            },
+                            oGeografia = new Geografia(){
+                                IdGeografia = Convert.ToInt32(dr["IdGeografia"].ToString()),
+                                Pais = dr["Pais"].ToString()
+                            } 
                         });
 
                     }
@@ -49,7 +56,7 @@ namespace CapaDatos
         }
 
         /*REGISTRAR EjePrincipal*/
-        public static bool RegistrarEjePrincipal(EjePrincipal oEjePrincipal)
+        public static bool RegistrarEjePrincipal(EjePrincipal objeto)
         {
 
             bool respuesta = true;
@@ -58,12 +65,12 @@ namespace CapaDatos
                 try
                 {
                     SqlCommand cmd = new SqlCommand("usp_RegistrarEjePrincipal", oConexion);
-                    cmd.Parameters.AddWithValue("RefEje", oEjePrincipal.RefEje);
-                    cmd.Parameters.AddWithValue("Nivel", oEjePrincipal.Nivel);
-                    cmd.Parameters.AddWithValue("Nombre", oEjePrincipal.Nombre);
-                    cmd.Parameters.AddWithValue("IdEjePadre", oEjePrincipal.Nombre);
-                    cmd.Parameters.AddWithValue("IdPerfil", oEjePrincipal.Nombre);
-                    cmd.Parameters.AddWithValue("IdGeografia", oEjePrincipal.Nombre);
+                    cmd.Parameters.AddWithValue("RefEje", objeto.RefEje);
+                    cmd.Parameters.AddWithValue("Nivel", objeto.Nivel);
+                    cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
+                    cmd.Parameters.AddWithValue("IdEjePadre", objeto.IdEjePadre);
+                    cmd.Parameters.AddWithValue("IdPerfil", objeto.oPerfil.IdPerfil);
+                    cmd.Parameters.AddWithValue("IdGeografia", objeto.oGeografia.IdGeografia);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();
@@ -83,7 +90,7 @@ namespace CapaDatos
 
         }
 
-        public static bool ModificarEjePrincipal(EjePrincipal oEjePrincipal)
+        public static bool ModificarEjePrincipal(EjePrincipal objeto)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
@@ -91,13 +98,13 @@ namespace CapaDatos
                 try
                 {
                     SqlCommand cmd = new SqlCommand("usp_ModificarEjePrincipal", oConexion);
-                    cmd.Parameters.AddWithValue("IdEje", oEjePrincipal.IdEje);
-                    cmd.Parameters.AddWithValue("RefEje", oEjePrincipal.RefEje);
-                    cmd.Parameters.AddWithValue("Nivel", oEjePrincipal.Nivel);
-                    cmd.Parameters.AddWithValue("Nombre", oEjePrincipal.Nombre);
-                    cmd.Parameters.AddWithValue("Nombre", oEjePrincipal.IdEjePadre);
-                    cmd.Parameters.AddWithValue("Nombre", oEjePrincipal.IdPerfil);
-                    cmd.Parameters.AddWithValue("Nombre", oEjePrincipal.IdGeografia);
+                    cmd.Parameters.AddWithValue("IdEje", objeto.IdEje);
+                    cmd.Parameters.AddWithValue("RefEje", objeto.RefEje);
+                    cmd.Parameters.AddWithValue("Nivel", objeto.Nivel);
+                    cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
+                    cmd.Parameters.AddWithValue("IdEjePadre", objeto.IdEjePadre);
+                    cmd.Parameters.AddWithValue("IdPerfil", objeto.oPerfil.IdPerfil);
+                    cmd.Parameters.AddWithValue("IdGeografia", objeto.oGeografia.IdGeografia);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -147,43 +154,9 @@ namespace CapaDatos
             return respuesta;
 
         }
-        public static List<EjePrincipal> ObtenerHijosEjePrincipal(int IdEje)
-        {
-            List<EjePrincipal> rptListaEjePrincipal = new List<EjePrincipal>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
-            {
-                SqlCommand cmd = new SqlCommand("usp_ObtenerHijosEjePrincipal", oConexion);
-                cmd.Parameters.AddWithValue("IdEje", IdEje);
-                cmd.CommandType = CommandType.StoredProcedure;
+        /*al final este no se va a usar  porque son objetos en la definición de ejes*/
+ 
 
-                try
-                {
-                    oConexion.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-
-                    while (dr.Read())
-                    {
-                        rptListaEjePrincipal.Add(new EjePrincipal()
-                        {
-                            IdEje = Convert.ToInt32(dr["IdEje"].ToString()),
-                            RefEje = dr["RefEje"].ToString(),
-                            Nivel = Convert.ToInt32(dr["IdEje"].ToString()),
-                            Nombre = dr["RefEje"].ToString(),
-                            IdEjePadre = Convert.ToInt32(dr["IdEje"].ToString()),
-                            IdPerfil = Convert.ToInt32(dr["IdEje"].ToString()),
-                            IdGeografia = Convert.ToInt32(dr["IdEje"].ToString())
-                        }); ;
-                    }
-                    dr.Close();
-                    return rptListaEjePrincipal;
-                }
-                catch (Exception ex)
-                {
-                    rptListaEjePrincipal = null;
-                    return rptListaEjePrincipal;
-                }
-            }
-        }
     }
 }
 

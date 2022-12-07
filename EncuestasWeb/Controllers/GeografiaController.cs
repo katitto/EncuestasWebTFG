@@ -64,12 +64,13 @@ namespace EncuestasWeb.Controllers
             bool respuesta = CD_Geografia.EliminarGeografia(id);
 
             return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
-        }      
+        }
+        /* NO lo he usado
         public JsonResult ObtenerBusqueda(string pais)
         {
             List<Geografia> oListaGeografia = CD_Geografia.ObtenerBusquedaGeografia(pais);
             return Json(oListaGeografia , JsonRequestBehavior.AllowGet);
         }
-
+        */
     }
 }

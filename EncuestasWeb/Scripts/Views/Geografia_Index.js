@@ -146,36 +146,3 @@ function eliminar($id) {
             });
         });
 }
-
-function muestraHijos($id) {
-
-    tabladata2 = $('#tbdatahijos').DataTable({
-        "ajax": {
-            "url": $.MisUrls.url.Url_ObtenerHijosGeografia + "?id=" + $id,
-            "type": "GET",
-            "datatype": "json"
-        },
-        "columns": [
-            { "data": "Pais" },
-            { "data": "CoordenadasX" },
-            { "data": "CoordenadasY" },
-            {
-                "data": "IdGeografia", "render": function (data, type, row, meta) {
-                    return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
-                        "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>" 
-                },
-                "orderable": false,
-                "searchable": false,
-                "width": "90px"
-            }
-        ],
-        "language": {
-            "url": $.MisUrls.url.Url_datatable_spanish
-        }
-    });
-
-
-    
-
-
-}

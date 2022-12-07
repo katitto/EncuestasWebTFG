@@ -13,7 +13,7 @@ namespace CapaModelo
         public int Nivel { get; set; }
         public string Nombre { get; set; }
         public int IdEjePadre { get; set; }
-        public int IdPerfil { get; set; }
-        public int IdGeografia { get; set; }
+        public Perfil oPerfil { get; set; }//¿tendría que ser del tipo rol? sí
+        public Geografia oGeografia { get; set; }//¿tendría que ser del tipo geografia? sí
     }
 }

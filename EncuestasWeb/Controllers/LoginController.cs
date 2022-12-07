@@ -40,10 +40,6 @@ namespace EncuestasWeb.Controllers
             return RedirectToAction("Index", "Dashboard");
         }
         //obtener datos de usuario conectado y pasarlo para el menú
-        public JsonResult ObtenerUsuarioConectado(string correo, string clave)
-        {
-            Usuario ObjUsuario = CD_Usuario.ObtenerUsuarios().Where(x => x.Email == correo && x.Contrasena == clave).FirstOrDefault();
-            return Json(ObjUsuario, JsonRequestBehavior.AllowGet);
-        }
+
     }
 }

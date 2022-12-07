@@ -1,5 +1,5 @@
 ﻿var tabladata;
-var tabladata2;
+
 
 $(document).ready(function () {
     /*Interactua con la vista y trae datos*/
@@ -21,34 +21,84 @@ $(document).ready(function () {
         },
         errorElement: 'span'
     });
+    $.get("EjePrincipal/Obtener", function (data) {
+        var ArrayPadres = [];
+        var ArrayHijos = [];
+        var ArrayTodosOrdenado = [];
+        var nfilas = Object.keys(data).length;
+        for (var i = 0; i < nfilas; i++) {
+            let ejePrincipalData = JSON.stringify(data[i]);
+            let ejePrincipal = JSON.parse(ejePrincipalData);
+            if (ejePrincipal.IdEjePadre == 0) {
+                ArrayPadres.push(ejePrincipal);
+            } else {
+                ArrayHijos.push(ejePrincipal);
+            }
+        }
 
+        for (var j = 0; j < ArrayPadres.length; j++) {
+            ArrayTodosOrdenado.push(ArrayPadres[j]);
+            for (var k = 0; k < ArrayHijos.length; k++) {
+
+                if (ArrayHijos[k].IdEjePadre == ArrayPadres[j].IdEje) {
+                    ArrayTodosOrdenado.push(ArrayHijos[k]);
+                }
+            }
+
+        }
     tabladata = $('#tbdata').DataTable({ /*genera un objeto tabledata con el id indicado*/
-        "ajax": { //ajax es una interfaz que transforma los datos en formato json en este caso
-            "url": $.MisUrls.url.Url_ObtenerEjePrincipal, //le damos la url que va ir al controlador
-            "type": "GET",
-            "datatype": "json"//le decimos el tipo
-        },
+        "data": ArrayTodosOrdenado, //le damos la url que va ir al controlador
+        "datatype": "json",//le decimos el tipo
         "columns": [ //le decimos qué columnas queremos mostrar
             { "data": "RefEje" },//lo que tenemos en ddbb
             { "data": "Nivel" },
             { "data": "Nombre" },
-            { "data": "IdEjePadre" },
-            { "data": "IdPerfil" },
-            { "data": "IdGeografia" },
+            { "data": "IdEjePadre" },//debe ir oculto
+            {
+                "data": "oPerfil", render: function (data) {
+                    return data.Descripcion
+                }               
+            },
+            
+            {
+                "data": "oGeografia", render: function (data) {
+                    return data.Pais
+                }
+            },
             {
                 "data": "IdEje", "render": function (data, type, row, meta) {
                     return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
-                        "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>" +
-                        "<button class='btn btn-primary btn-sm ml-2' type='button' onclick='muestraHijos(" + data + ")'><i class='fas fa-forward'></i></button>"
+                        "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>"
                 },
                 "orderable": false,
                 "searchable": false,
                 "width": "90px"
             },
         ],
+        "columnDefs": [
+            {
+                "targets": 3,
+                "visible": false
+            }
+        ],
+        "sorting": false,
+        "rowCallback": function (row, data) {
+            if (data.IdEjePadre == 0) {
+                $(row).addClass('padre');
+                $(row).css('background-color', '#99ff9c');
+                $(row).css('font-weight', 'bold');
+
+            } else {
+
+                $(row).addClass('cat1');
+                $(row).css('font-size', '15px');
+
+            }
+        },
         "language": {
             "url": $.MisUrls.url.Url_datatable_spanish
         }
+        });
     });
 });
 
@@ -62,17 +112,36 @@ function abrirPopUpForm(json) {
         $("#txtrefeje").val(json.RefEje);
         $("#txtnivel").val(json.Nivel);
         $("#txtnombre").val(json.Nombre);
-        $("#txtidejepadre").val(json.IdEjePadre);
-        $("#txtidperfil").val(json.IdPerfil);
-        $("#txtidgeografia").val(json.IdGeografia);
+        //$("#txtidejepadre").val(json.IdEjePadre);
+        //$("#txtidperfil").val(json.IdPerfil);
+        //$("#txtidgeografia").val(json.IdGeografia);
+        $.get("EjePrincipal/ObtenerPadres", function (data) {
+            cargaComboSelecPadres(json.IdEjePadre, data, document.getElementById("cboPadres"));
+        });
+
+        $.get("EjePrincipal/ObtenerPerfiles", function (data) {
+            cargaComboSelecPerfil(json.oPerfil.IdPerfil, data, document.getElementById("cboPerfiles"));
+        });
+        $.get("EjePrincipal/ObtenerGeografias", function (data) {
+            cargaComboSelecGeografia(json.oGeografia.IdGeografia, data, document.getElementById("cboGeografias"));
+        });
 
     } else {
         $("#txtrefeje").val("");
         $("#txtnivel").val("");
         $("#txtnombre").val("");
-        $("#txtidejepadre").val("");
-        $("#txtidperfil").val("");
-        $("#txtidgeografia").val("");
+        //$("#txtidejepadre").val("");
+       // $("#txtidperfil").val("");
+        //$("#txtidgeografia").val("");
+        $.get("EjePrincipal/ObtenerPadres", function (data) {
+            cargaComboSelecPadres("", data, document.getElementById("cboPadres"));
+        });
+        $.get("EjePrincipal/ObtenerPerfiles", function (data) {
+            cargaComboSelecPerfil("", data, document.getElementById("cboPerfiles"));
+        });
+        $.get("EjePrincipal/ObtenerGeografias", function (data) {
+            cargaComboSelecGeografia("", data, document.getElementById("cboGeografias"));
+        });
     }
 
     $('#FormModal').modal('show');
@@ -83,17 +152,24 @@ function Guardar() {
 
     if ($("#formNivel").valid()) {
 
-        var request = {
+        //Objeto Geografia
+        var request = {           
             objeto: {
                 IdEje: $("#txtid").val(),
                 RefEje: $("#txtrefeje").val(),
                 Nivel: $("#txtnivel").val(),
                 Nombre: $("#txtnombre").val(),
-                IdEjePadre: $("#txtidejepadre").val(),
-                IdPerfil: $("#txtidperfil").val(),
-                IdGeografia: $("#txtidgeografia").val()
+                IdEjePadre: $("#cboPadres").val(),
+                oPerfil : {
+                    IdPerfil: $("#cboPerfiles").val() 
+                },
+                oGeografia : {
+                    IdGeografia: $("#cboGeografias").val()
+                }
+                }
+                
             }
-        }
+        
 
         jQuery.ajax({
             url: $.MisUrls.url.Url_GuardarEjePrincipal,
@@ -103,9 +179,10 @@ function Guardar() {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
 
-                if (data.resultado) {
-                    tabladata.ajax.reload();
+                if (data.resultado) {                   
                     $('#FormModal').modal('hide');
+                    refrescaTabla();
+                    
                 } else {
 
                     swal("Mensaje", "No se pudo guardar los cambios", "warning")
@@ -127,7 +204,7 @@ function Guardar() {
 function eliminar($id) {
     swal({
         title: "Mensaje",
-        text: "¿Desea eliminar el RefEje seleccionado?",
+        text: "¿Desea eliminar el La organización seleccionada?",
         type: "warning",
         showCancelButton: true,
 
@@ -148,9 +225,10 @@ function eliminar($id) {
                 success: function (data) {
 
                     if (data.resultado) {
-                        tabladata.ajax.reload();
+                        $('#FormModal').modal('hide');
+                        refrescaTabla();
                     } else {
-                        swal("Mensaje", "No se pudo eliminar la EjePrincipal", "warning")
+                        swal("Mensaje", "No se pudo eliminar la Organización", "warning")
                     }
                 },
                 error: function (error) {
@@ -162,34 +240,125 @@ function eliminar($id) {
             });
         });
 }
-
-function muestraHijos($id) {
-
-    tabladata2 = $('#tbdatahijos').DataTable({
-        "ajax": {
-            "url": $.MisUrls.url.Url_ObtenerHijosEjePrincipal + "?id=" + $id,
-            "type": "GET",
-            "datatype": "json"
-        },
-        "columns": [
-            { "data": "RefEje" },
-            { "data": "Nivel" },
-            { "data": "Nombre" },
-            { "data": "IdEjePadre" },
-            { "data": "IdPerfil" },
-            { "data": "IdGeografia" },
-            {
-                "data": "IdEje", "render": function (data, type, row, meta) {
-                    return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
-                        "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>"
-                },
-                "orderable": false,
-                "searchable": false,
-                "width": "90px"
+function cargaComboSelecPerfil(value, data, control) {
+    var contenido = "";
+    var nfilas = Object.keys(data).length;
+    //cargar el combo
+    for (var i = 0; i < nfilas; i++) {
+        contenido += "<option value='" + data[i].IdPerfil +"'>"
+        contenido += data[i].Descripcion;
+        contenido += "</option>"
+    }
+    control.innerHTML = contenido;
+    control.value = value;
+}
+function cargaComboSelecGeografia(value, data, control) {
+    var contenido = "";
+    var nfilas = Object.keys(data).length;
+    //cargar el combo
+    for (var i = 0; i < nfilas; i++) {
+        contenido += "<option value='" + data[i].IdGeografia + "'>"
+        contenido += data[i].Pais;
+        contenido += "</option>"
+    }
+    control.innerHTML = contenido;
+    control.value = value;
+}
+function cargaComboSelecPadres(value, data, control) {
+    var contenido = "";
+    var nfilas = Object.keys(data).length;
+    contenido += "<option value='0'>TOP";
+    //cargar el combo
+    for (var i = 0; i < nfilas; i++) {
+        contenido += "<option value='" + data[i].IdEje + "'>"
+        contenido += data[i].Nombre;
+        contenido += "</option>"
+    }
+    control.innerHTML = contenido;
+    control.value = value;
+}
+function refrescaTabla() {
+    $.get("EjePrincipal/Obtener", function (data) {
+        var ArrayPadres = [];
+        var ArrayHijos = [];
+        var ArrayTodosOrdenado = [];
+        var nfilas = Object.keys(data).length;
+        for (var i = 0; i < nfilas; i++) {
+            let ejePrincipalData = JSON.stringify(data[i]);
+            let ejePrincipal = JSON.parse(ejePrincipalData);
+            if (ejePrincipal.IdEjePadre == 0) {
+                ArrayPadres.push(ejePrincipal);
+            } else {
+                ArrayHijos.push(ejePrincipal);
             }
-        ],
-        "language": {
-            "url": $.MisUrls.url.Url_datatable_spanish
         }
+
+        for (var j = 0; j < ArrayPadres.length; j++) {
+            ArrayTodosOrdenado.push(ArrayPadres[j]);
+            for (var k = 0; k < ArrayHijos.length; k++) {
+
+                if (ArrayHijos[k].IdEjePadre == ArrayPadres[j].IdEje) {
+                    ArrayTodosOrdenado.push(ArrayHijos[k]);
+                }
+            }
+
+        }
+        $("#tbdata").dataTable().fnDestroy();
+        tabladata = $('#tbdata').DataTable({ /*genera un objeto tabledata con el id indicado*/
+            "data": ArrayTodosOrdenado, //le damos la url que va ir al controlador
+            "datatype": "json",//le decimos el tipo
+            "columns": [ //le decimos qué columnas queremos mostrar
+                { "data": "RefEje" },//lo que tenemos en ddbb
+                { "data": "Nivel" },
+                { "data": "Nombre" },
+                { "data": "IdEjePadre" },//debe ir oculto
+                {
+                    "data": "oPerfil", render: function (data) {
+                        return data.Descripcion
+                    }
+                },
+
+                {
+                    "data": "oGeografia", render: function (data) {
+                        return data.Pais
+                    }
+                },
+                {
+                    "data": "IdEje", "render": function (data, type, row, meta) {
+                        return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
+                            "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>"
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "90px"
+                },
+            ],
+            "columnDefs": [
+                {
+                    "targets": 3,
+                    "visible": false
+                }
+            ],
+            "sorting": false,
+            "rowCallback": function (row, data) {
+                if (data.IdEjePadre == 0) {
+                    $(row).addClass('padre');
+                    $(row).css('background-color', '#99ff9c');
+                    $(row).css('font-weight', 'bold');
+
+                } else {
+
+                    $(row).addClass('cat1');
+                    $(row).css('font-size', '15px');
+
+                }
+            },
+            "language": {
+                "url": $.MisUrls.url.Url_datatable_spanish
+            }
+        });
+        $("#tbdata").dataTable().clear();
+        tabladata.ajax.reload();
     });
+
 }

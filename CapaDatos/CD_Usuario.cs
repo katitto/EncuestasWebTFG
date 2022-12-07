@@ -16,7 +16,7 @@ namespace CapaDatos
             List<Usuario> rptListaUsuario = new List<Usuario>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
-                SqlCommand cmd = new SqlCommand("usp_ObtenerUsuario", oConexion);
+                SqlCommand cmd = new SqlCommand("usp_ObtenerUsuarioRel", oConexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
@@ -34,8 +34,15 @@ namespace CapaDatos
                             User = dr["User"].ToString(),
                             Contrasena = dr["Contrasena"].ToString(),
                             Email = dr["Email"].ToString(),
-                            IdEje = Convert.ToInt32(dr["IdEje"].ToString()),
-                            IdRol = Convert.ToInt32(dr["IdRol"].ToString())
+                            oEje = new EjePrincipal() { 
+                                IdEje = Convert.ToInt32(dr["IdEje"].ToString()),
+                                Nombre = dr["NombreEje"].ToString()
+                            },                            
+                            oRol = new Rol()
+                            {
+                                IdRol = Convert.ToInt32(dr["IdRol"].ToString()),
+                                Nombre = dr["NombreRol"].ToString()
+                            }
                         });
                     }
                     dr.Close();
@@ -63,9 +70,9 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Apellido", objeto.Apellido);
                     cmd.Parameters.AddWithValue("User", objeto.User);
                     cmd.Parameters.AddWithValue("Contrasena", objeto.Contrasena);
-                    cmd.Parameters.AddWithValue("Email", objeto.Contrasena);
-                    cmd.Parameters.AddWithValue("IdEje", objeto.IdEje);
-                    cmd.Parameters.AddWithValue("IdRol", objeto.IdRol);
+                    cmd.Parameters.AddWithValue("Email", objeto.Email);
+                    cmd.Parameters.AddWithValue("IdEje", objeto.oEje.IdEje);
+                    cmd.Parameters.AddWithValue("IdRol", objeto.oRol.IdRol);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();
@@ -96,8 +103,8 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("User", objeto.User);
                     cmd.Parameters.AddWithValue("Contrasena", objeto.Contrasena);
                     cmd.Parameters.AddWithValue("Email ", objeto.Email);
-                    cmd.Parameters.AddWithValue("IdEje", objeto.IdEje);
-                    cmd.Parameters.AddWithValue("IdRol", objeto.IdRol);
+                    cmd.Parameters.AddWithValue("IdEje", objeto.oEje.IdEje);
+                    cmd.Parameters.AddWithValue("IdRol", objeto.oRol.IdRol);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();
@@ -142,5 +149,6 @@ namespace CapaDatos
 
             return respuesta;
         }
+       
     }
 }

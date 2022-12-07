@@ -20,7 +20,7 @@ namespace EncuestasWeb.Views
 
         {
             List<EjePrincipal> oListaEjePrincipal = CD_EjePrincipal.ObtenerEjePrincipal();
-            return Json(new { data = oListaEjePrincipal }, JsonRequestBehavior.AllowGet);
+            return Json(oListaEjePrincipal, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -50,12 +50,38 @@ namespace EncuestasWeb.Views
 
             return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
         }
-
+        /* NO LO HE USADO
         public JsonResult ObtenerHijos(int id = 0)
         {
 
             List<EjePrincipal> oListaEjePrincipal = CD_EjePrincipal.ObtenerHijosEjePrincipal(id);
             return Json(new { data = oListaEjePrincipal }, JsonRequestBehavior.AllowGet);
+        }*/
+
+       /* public JsonResult ObtenerPerfilById(int id)
+        {
+            List<Perfil> oListaPerfil= CD_EjePrincipal.ObtenerPerfilById(id);
+            return Json(oListaPerfil, JsonRequestBehavior.AllowGet);
+        }*/
+
+        public JsonResult ObtenerPerfiles()
+        {
+            List<Perfil> rptListaPerfil = new List<Perfil>();
+            rptListaPerfil = CD_Perfil.ObtenerPerfil();
+            return Json(rptListaPerfil, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ObtenerGeografias()
+        {
+            List<Geografia> rptListaGeografia = new List<Geografia>();
+            rptListaGeografia = CD_Geografia.ObtenerGeografia();
+            return Json(rptListaGeografia, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ObtenerPadres(int id= 0)
+        {
+            List<EjePrincipal> rptListaEjePrincipal = new List<EjePrincipal>();
+            rptListaEjePrincipal = CD_EjePrincipal.ObtenerEjePrincipal().Where(x => x.IdEjePadre == id).ToList();
+            return Json(rptListaEjePrincipal, JsonRequestBehavior.AllowGet);
         }
 
     }

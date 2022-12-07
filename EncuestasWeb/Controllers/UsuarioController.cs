@@ -48,5 +48,20 @@ namespace EncuestasWeb.Controllers
 
             return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
         }
+        //combos
+        public JsonResult ObtenerRoles()
+        {
+            List<Rol> rptListaGeografia = new List<Rol>();
+            rptListaGeografia = CD_Rol.ObtenerRoles();
+            return Json(rptListaGeografia, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ObtenerEjes()
+        {
+            List<EjePrincipal> rptListaEjePrincipal = new List<EjePrincipal>();
+            rptListaEjePrincipal = CD_EjePrincipal.ObtenerEjePrincipal();
+            return Json(rptListaEjePrincipal, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -189,6 +189,7 @@ namespace CapaDatos
                 }
             }
         }
+        /*NO LO HE USADO
         public static List<Geografia> ObtenerBusquedaGeografia(string Pais)
         {
             List<Geografia> rptListaGeografia = new List<Geografia>();
@@ -221,6 +222,6 @@ namespace CapaDatos
                 }
             }
         }
-
+*/
     }
 }
