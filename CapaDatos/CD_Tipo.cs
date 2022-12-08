@@ -1,22 +1,23 @@
-﻿using System;
-using CapaModelo;
+﻿using CapaModelo;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    public class CD_Unidad
+    public class CD_Tipo
     {
-        public static List<Unidad> ObtenerUnidad()
+    
+        public static List<Tipo> ObtenerTipo()
         {
-            List<Unidad> rptListaUnidad = new List<Unidad>();
+            List<Tipo> rptListaTipo = new List<Tipo>();
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
-                SqlCommand cmd = new SqlCommand("usp_ObtenerUnidad", oConexion);
+                SqlCommand cmd = new SqlCommand("usp_ObtenerTipo", oConexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
@@ -26,33 +27,34 @@ namespace CapaDatos
 
                     while (dr.Read())
                     {
-                        rptListaUnidad.Add(new Unidad()
+                        rptListaTipo.Add(new Tipo()
                         {
-                            IdUnidad = Convert.ToInt32(dr["IdUnidad"].ToString()),
-                            Tipo = dr["Tipo"].ToString(),
-                            Descripcion = dr["Descripcion"].ToString()
+                            IdTipo = Convert.ToInt32(dr["IdTipo"].ToString()),
+                            Nombre = dr["Nombre"].ToString()
                         });
                     }
                     dr.Close();
-                    return rptListaUnidad;
-                }catch(Exception ex)
+
+                    return rptListaTipo;
+
+                }
+                catch (Exception ex)
                 {
-                    rptListaUnidad = null;
-                    return rptListaUnidad;
+                    rptListaTipo = null;
+                    return rptListaTipo;
                 }
             }
         }
-        public static bool RegistrarUnidad(Unidad objeto)
+
+        public static bool RegistrarTipo(Tipo objeto)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_RegistrarUnidad", oConexion);
-                    cmd.Parameters.AddWithValue("IdUnidad ", objeto.IdUnidad);
-                    cmd.Parameters.AddWithValue("Tipo", objeto.Tipo);
-                    cmd.Parameters.AddWithValue("Descripcion", objeto.Descripcion);
+                    SqlCommand cmd = new SqlCommand("usp_RegistrarTipo", oConexion);
+                    cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();
@@ -69,17 +71,16 @@ namespace CapaDatos
             return respuesta;
         }
 
-        public static bool ModificarUnidad(Unidad objeto)
+        public static bool ModificarTipo(Tipo objeto)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_ModificarUnidad", oConexion);
-                    cmd.Parameters.AddWithValue("IdUnidad ", objeto.IdUnidad);
-                    cmd.Parameters.AddWithValue("Tipo", objeto.Tipo);
-                    cmd.Parameters.AddWithValue("Descripcion", objeto.Descripcion);
+                    SqlCommand cmd = new SqlCommand("usp_ModificarTipo", oConexion);
+                    cmd.Parameters.AddWithValue("IdTipo ", objeto.IdTipo);
+                    cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();
@@ -96,15 +97,15 @@ namespace CapaDatos
             return respuesta;
         }
 
-        public static bool EliminarUnidad(int IdUnidad)
+        public static bool EliminarTipo(int IdTipo)
         {
             bool respuesta = true;
             using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("usp_EliminarUnidad", oConexion);
-                    cmd.Parameters.AddWithValue("IdUnidad", IdUnidad);
+                    SqlCommand cmd = new SqlCommand("usp_EliminarTipo", oConexion);
+                    cmd.Parameters.AddWithValue("IdTipo", IdTipo);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -126,3 +127,6 @@ namespace CapaDatos
         }
     }
 }
+    
+
+

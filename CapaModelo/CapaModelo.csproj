@@ -56,6 +56,7 @@
     <Compile Include="PreInd.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tipo.cs" />
     <Compile Include="Unidad.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuRol.cs" />

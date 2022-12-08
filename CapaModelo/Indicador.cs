@@ -10,6 +10,8 @@ namespace CapaModelo
     {
         public int IdIndicador { get; set; }
         public string Descripcion { get; set; }
-        public int Unidad { get; set; }
+        public Unidad oUnidad { get; set; }
+        public Tipo oTipo { get; set; }
+        public Perfil oPerfil { get; set; }
     }
 }

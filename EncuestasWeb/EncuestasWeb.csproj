@@ -129,10 +129,13 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GeografiaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndicadorController.cs" />
     <Compile Include="Controllers\InformeMapsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\RolController.cs" />
+    <Compile Include="Controllers\TipoController.cs" />
+    <Compile Include="Controllers\UnidadController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1990,11 +1993,14 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\Views\EjePrincipal_Index.js" />
     <Content Include="Scripts\Views\Geografia_Index.js" />
+    <Content Include="Scripts\Views\Indicador_Index.js" />
     <Content Include="Scripts\Views\InformeMaps_Index.js" />
     <Content Include="Scripts\Views\LlenarComboBox.js" />
     <Content Include="Scripts\Views\Perfil_Index2.js" />
     <Content Include="Scripts\Views\Rol_Index.js" />
     <Content Include="Scripts\Views\TablaJS_Index.js" />
+    <Content Include="Scripts\Views\Tipo_Index.js" />
+    <Content Include="Scripts\Views\Unidad_Index.js" />
     <Content Include="Scripts\Views\Usuario_Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -2030,6 +2036,9 @@
     <Content Include="Views\Geografia\ComboBoxJS.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\InformeMaps\Index.cshtml" />
+    <Content Include="Views\Tipo\Index.cshtml" />
+    <Content Include="Views\Unidad\Index.cshtml" />
+    <Content Include="Views\Indicador\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

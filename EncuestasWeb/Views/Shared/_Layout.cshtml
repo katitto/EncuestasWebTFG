@@ -145,13 +145,13 @@
                                         <a href="#">Campañas</a>
                                     </li>
                                     <li>
-                                        <a href="#">Indicadores</a>
+                                        <a href="@Url.Action("Index","Indicador")">Indicadores/Preguntas</a>
                                     </li>
                                     <li>
-                                        <a href="#">Unidades</a>
+                                        <a href="@Url.Action("Index","Unidad")">Unidades</a>
                                     </li>
                                     <li>
-                                        <a href="#">Tipos</a>
+                                        <a href="@Url.Action("Index","Tipo")">Tipos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -300,6 +300,20 @@
         $.MisUrls.urls({ Url_ObtenerUsuarios: '@Url.Action("Obtener", "Usuario")' });
         $.MisUrls.urls({ Url_GuardarUsuario: '@Url.Action("Guardar", "Usuario")' });
         $.MisUrls.urls({ Url_EliminarUsuario: '@Url.Action("Eliminar", "Usuario")' });
+
+        //controlador tipos
+        $.MisUrls.urls({ Url_ObtenerTipo: '@Url.Action("Obtener", "Tipo")' });
+        $.MisUrls.urls({ Url_GuardarTipo: '@Url.Action("Guardar", "Tipo")' });
+        $.MisUrls.urls({ Url_EliminarTipo: '@Url.Action("Eliminar", "tipo")' });
+        //controlador unidad
+        $.MisUrls.urls({ Url_ObtenerUnidad: '@Url.Action("Obtener", "Unidad")' });
+        $.MisUrls.urls({ Url_GuardarUnidad: '@Url.Action("Guardar", "Unidad")' });
+        $.MisUrls.urls({ Url_EliminarUnidad: '@Url.Action("Eliminar", "Unidad")' });
+
+        //controlador Indicador
+        $.MisUrls.urls({ Url_ObtenerIndicador: '@Url.Action("Obtener", "Indicador")' });
+        $.MisUrls.urls({ Url_GuardarIndicador: '@Url.Action("Guardar", "Indicador")' });
+        $.MisUrls.urls({ Url_EliminarIndicador: '@Url.Action("Eliminar", "Indicador")' });
 
         //lenguaje español datatable
         $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });
