@@ -30,8 +30,8 @@ namespace CapaDatos
                         {
                             IdGeografia = Convert.ToInt32(dr["IdGeografia"].ToString()),
                             Pais = dr["Pais"].ToString(),
-                            CoordenadasX = Convert.ToDecimal(dr["CoordenadasX"].ToString()),
-                            CoordenadasY = Convert.ToDecimal(dr["CoordenadasY"].ToString()),
+                            CoordenadasX = dr["CoordenadasX"].ToString(),
+                            CoordenadasY = dr["CoordenadasY"].ToString(),
                             Padre = Convert.ToInt32(dr["Padre"].ToString())
 
                         });
@@ -174,8 +174,8 @@ namespace CapaDatos
                         {
                             IdGeografia = Convert.ToInt32(dr["IdGeografia"].ToString()),
                             Pais = dr["Pais"].ToString(),
-                            CoordenadasX = Convert.ToDecimal(dr["CoordenadasX"].ToString()),
-                            CoordenadasY = Convert.ToDecimal(dr["CoordenadasY"].ToString()),
+                            CoordenadasX = dr["CoordenadasX"].ToString(),
+                            CoordenadasY = dr["CoordenadasY"].ToString(),
                             Padre = Convert.ToInt32(dr["Padre"].ToString())
                         }); 
                     }
@@ -189,39 +189,6 @@ namespace CapaDatos
                 }
             }
         }
-        /*NO LO HE USADO
-        public static List<Geografia> ObtenerBusquedaGeografia(string Pais)
-        {
-            List<Geografia> rptListaGeografia = new List<Geografia>();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
-            {
-                try
-                {
-                    
-                    SqlCommand cmd = new SqlCommand("usp_ObtenerBusquedaGeografia", oConexion);
-                    cmd.Parameters.AddWithValue("Pais", Pais);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    oConexion.Open();
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    
-                    while (dr.Read())
-                    {
-                        rptListaGeografia.Add(new Geografia()
-                        {
-                            Pais = dr["Pais"].ToString()
-
-                        }); 
-                    }
-                    dr.Close();
-                    return rptListaGeografia;
-                }
-                catch (Exception ex)
-                {
-                    rptListaGeografia = null;
-                    return rptListaGeografia;
-                }
-            }
-        }
-*/
+ 
     }
 }

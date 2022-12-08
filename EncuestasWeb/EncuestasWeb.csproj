@@ -129,6 +129,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GeografiaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InformeMapsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\RolController.cs" />
@@ -1989,6 +1990,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\Views\EjePrincipal_Index.js" />
     <Content Include="Scripts\Views\Geografia_Index.js" />
+    <Content Include="Scripts\Views\InformeMaps_Index.js" />
     <Content Include="Scripts\Views\LlenarComboBox.js" />
     <Content Include="Scripts\Views\Perfil_Index2.js" />
     <Content Include="Scripts\Views\Rol_Index.js" />
@@ -2027,6 +2029,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Geografia\ComboBoxJS.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\InformeMaps\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
