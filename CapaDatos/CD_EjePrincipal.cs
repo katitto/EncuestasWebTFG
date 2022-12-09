@@ -68,7 +68,10 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("RefEje", objeto.RefEje);
                     cmd.Parameters.AddWithValue("Nivel", objeto.Nivel);
                     cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
-                    cmd.Parameters.AddWithValue("IdEjePadre", objeto.IdEjePadre);
+                    if (objeto.IdEjePadre != 0)
+                    {
+                        cmd.Parameters.AddWithValue("IdEjePadre", objeto.IdEjePadre);
+                    }
                     cmd.Parameters.AddWithValue("IdPerfil", objeto.oPerfil.IdPerfil);
                     cmd.Parameters.AddWithValue("IdGeografia", objeto.oGeografia.IdGeografia);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
@@ -102,7 +105,10 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("RefEje", objeto.RefEje);
                     cmd.Parameters.AddWithValue("Nivel", objeto.Nivel);
                     cmd.Parameters.AddWithValue("Nombre", objeto.Nombre);
-                    cmd.Parameters.AddWithValue("IdEjePadre", objeto.IdEjePadre);
+                    if (objeto.IdEjePadre != 0)
+                    {
+                        cmd.Parameters.AddWithValue("IdEjePadre", objeto.IdEjePadre);
+                    }
                     cmd.Parameters.AddWithValue("IdPerfil", objeto.oPerfil.IdPerfil);
                     cmd.Parameters.AddWithValue("IdGeografia", objeto.oGeografia.IdGeografia);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;

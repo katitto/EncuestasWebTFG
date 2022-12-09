@@ -13,5 +13,6 @@ namespace CapaModelo
         public Unidad oUnidad { get; set; }
         public Tipo oTipo { get; set; }
         public Perfil oPerfil { get; set; }
+        public string RefIndicador { get; set; }
     }
 }

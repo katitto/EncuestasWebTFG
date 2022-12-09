@@ -28,7 +28,7 @@ namespace CapaDatos
                         rptListaIndicador.Add(new Indicador()
                         {
                             IdIndicador = Convert.ToInt32(dr["IdIndicador"].ToString()),
-                            Descripcion = dr["IdEncuesta"].ToString(),
+                            Descripcion = dr["Descripcion"].ToString(),
                             oUnidad = new Unidad()
                             {
                                 IdUnidad = Convert.ToInt32(dr["IdUnidad"].ToString()),
@@ -43,7 +43,7 @@ namespace CapaDatos
                                 IdPerfil = Convert.ToInt32(dr["IdPerfil"].ToString()),
                                 RefPerfil = dr["RefPerfil"].ToString()
                             },
-
+                            RefIndicador = dr["RefIndicador"].ToString()
                         });
                     }
                     dr.Close();
@@ -63,11 +63,11 @@ namespace CapaDatos
                 try
                 {
                     SqlCommand cmd = new SqlCommand("usp_RegistrarIndicador", oConexion);
-                    cmd.Parameters.AddWithValue("IdIndicador ", objeto.IdIndicador);
                     cmd.Parameters.AddWithValue("Descripcion", objeto.Descripcion);
-                    cmd.Parameters.AddWithValue("Unidad", objeto.oUnidad.IdUnidad);
-                    cmd.Parameters.AddWithValue("Tipo", objeto.oTipo.IdTipo);
-                    cmd.Parameters.AddWithValue("Perfil", objeto.oPerfil.IdPerfil);
+                    cmd.Parameters.AddWithValue("IdUnidad", objeto.oUnidad.IdUnidad);
+                    cmd.Parameters.AddWithValue("IdTipo", objeto.oTipo.IdTipo);
+                    cmd.Parameters.AddWithValue("IdPerfil", objeto.oPerfil.IdPerfil);
+                    cmd.Parameters.AddWithValue("RefIndicador", objeto.RefIndicador);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();
@@ -94,9 +94,10 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand("usp_ModificarIndicador", oConexion);
                     cmd.Parameters.AddWithValue("IdIndicador ", objeto.IdIndicador);
                     cmd.Parameters.AddWithValue("Descripcion", objeto.Descripcion);
-                    cmd.Parameters.AddWithValue("Unidad", objeto.oUnidad.IdUnidad);
-                    cmd.Parameters.AddWithValue("Tipo", objeto.oTipo.IdTipo);
-                    cmd.Parameters.AddWithValue("Perfil", objeto.oPerfil.IdPerfil);
+                    cmd.Parameters.AddWithValue("IdUnidad", objeto.oUnidad.IdUnidad);
+                    cmd.Parameters.AddWithValue("IdTipo", objeto.oTipo.IdTipo);
+                    cmd.Parameters.AddWithValue("IdPerfil", objeto.oPerfil.IdPerfil);
+                    cmd.Parameters.AddWithValue("RefIndicador", objeto.RefIndicador);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
                     oConexion.Open();

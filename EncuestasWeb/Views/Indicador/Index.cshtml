@@ -76,7 +76,7 @@
     <div class="col-sm-12">
         <div class="card border-dark">
             <div class="card-header text-white bg-dark">
-                <h5 class="float-left">Lista de Usuarios</h5>
+                <h5 class="float-left">Lista de Indicadores/Preguntas</h5>
                 <button class="btn btn-success btn-sm float-right" onclick="abrirPopUpForm(null)">
                     <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo
                 </button>
@@ -89,6 +89,7 @@
                             <th>Unidad</th>
                             <th>Tipo</th>
                             <th>Perfil</th>
+                            <th>Referencia</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -117,10 +118,17 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label for="txtrefindicador">Referencia<span class="error"></span></label>
+                                <input type="text" class="form-control required" id="txtrefindicador" name="refindicador" autocomplete="9%%943511">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label for="txtdescripcion">Descripcion <span class="error"></span></label>
                                 <input type="text" class="form-control required" id="txtdescripcion" name="descripcion" autocomplete="9%%943511">
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtunidad">Unidad <span class="error"></span></label>

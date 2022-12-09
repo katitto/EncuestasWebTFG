@@ -14,7 +14,7 @@ namespace CapaModelo
         public string User { get; set; }
         public string Contrasena { get; set; }
         public string Email { get; set; }
-        public EjePrincipal oEje { get; set; }
+        public int IdEje { get; set; }
         public Rol oRol { get; set; }
 
 

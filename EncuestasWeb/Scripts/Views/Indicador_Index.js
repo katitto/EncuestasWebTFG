@@ -5,15 +5,17 @@ $(document).ready(function () {
     $("#formNivel").validate({
         rules: {
             Descripcion: "required",
-            Unidad: "required",
-            Tipo: "required",
-            Perfil: "required"
+            IdUnidad: "required",
+            IdTipo: "required",
+            IdPerfil: "required",
+            RefIndicador: "required"
         },
         messages: {
             Descripcion: "(*)",
-            Unidad: "(*)",
-            Tipo: "required",
-            Perfil: "required"
+            IdUnidad: "(*)",
+            IdTipo: "required",
+            IdPerfil: "required",
+            RefIndicador: "required"
 
         },
         errorElement: 'span'
@@ -36,11 +38,15 @@ $(document).ready(function () {
             {
                 "data": "oTipo", render: function (data) {
                     return data.Nombre
+                }
             },
             {
                 "data": "oPerfil", render: function (data) {
                     return data.RefPerfil
+                }
+                   
             },
+            { "data": "RefIndicador" },
             {
                 "data": "IdIndicador", "render": function (data, type, row, meta) {
                     return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
@@ -67,14 +73,15 @@ function abrirPopUpForm(json) {
         $("#txtdescripcion").val(json.Descripcion);
         //$("#txtunidad").val(json.Unidad);
         $.get("Indicador/ObtenerUnidades", function (data) {
-            cargaComboSelecUnidades(json.IdUnidad, data, document.getElementById("cboUnidades"));
+            cargaComboSelecUnidades(json.oUnidad.IdUnidad, data, document.getElementById("cboUnidades"));
         });
         $.get("Indicador/ObtenerTipos", function (data) {
-            cargaComboSelecTipos(json.IdTipo, data, document.getElementById("cboTipos"));
+            cargaComboSelecTipos(json.oTipo.IdTipo, data, document.getElementById("cboTipos"));
         });
         $.get("Indicador/ObtenerPerfiles", function (data) {
-            cargaComboSelecTipos(json.IdPerfil, data, document.getElementById("cboPerfiles"));
+            cargaComboSelecPerfiles(json.oPerfil.IdPerfil, data, document.getElementById("cboPerfiles"));
         });
+        $("#txtrefindicador").val(json.Descripcion);
 
 
     } else {
@@ -88,8 +95,9 @@ function abrirPopUpForm(json) {
             cargaComboSelecTipos("", data, document.getElementById("cboTipos"));
         });
         $.get("Indicador/ObtenerPerfiles", function (data) {
-            cargaComboSelecTipos("", data, document.getElementById("cboPerfiles"));
+            cargaComboSelecPerfiles("", data, document.getElementById("cboPerfiles"));
         });
+        $("#txtrefindicador").val("");
     }
 
     $('#FormModal').modal('show');
@@ -113,7 +121,8 @@ function Guardar() {
                 },
                 oPerfil: {
                     IdPerfil: $("#cboPerfiles").val()
-                }
+                },
+                RefIndicador: $("#txtrefindicador").val()
 
             }
         }
@@ -220,7 +229,7 @@ function cargaComboSelecPerfiles(value, data, control) {
     //cargar el combo
     for (var i = 0; i < nfilas; i++) {
         contenido += "<option value='" + data[i].IdPerfil + "'>"
-        contenido += data[i].RefPerfil;
+        contenido += data[i].Descripcion;
         contenido += "</option>"
     }
     control.innerHTML = contenido;

@@ -34,10 +34,7 @@ namespace CapaDatos
                             User = dr["User"].ToString(),
                             Contrasena = dr["Contrasena"].ToString(),
                             Email = dr["Email"].ToString(),
-                            oEje = new EjePrincipal() { 
-                                IdEje = Convert.ToInt32(dr["IdEje"].ToString()),
-                                Nombre = dr["NombreEje"].ToString()
-                            },                            
+                            IdEje = Convert.ToInt32(dr["IdEje"].ToString()),
                             oRol = new Rol()
                             {
                                 IdRol = Convert.ToInt32(dr["IdRol"].ToString()),
@@ -71,7 +68,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("User", objeto.User);
                     cmd.Parameters.AddWithValue("Contrasena", objeto.Contrasena);
                     cmd.Parameters.AddWithValue("Email", objeto.Email);
-                    cmd.Parameters.AddWithValue("IdEje", objeto.oEje.IdEje);
+                    cmd.Parameters.AddWithValue("IdEje", objeto.IdEje);
                     cmd.Parameters.AddWithValue("IdRol", objeto.oRol.IdRol);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -103,7 +100,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("User", objeto.User);
                     cmd.Parameters.AddWithValue("Contrasena", objeto.Contrasena);
                     cmd.Parameters.AddWithValue("Email ", objeto.Email);
-                    cmd.Parameters.AddWithValue("IdEje", objeto.oEje.IdEje);
+                    cmd.Parameters.AddWithValue("IdEje", objeto.IdEje);
                     cmd.Parameters.AddWithValue("IdRol", objeto.oRol.IdRol);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;

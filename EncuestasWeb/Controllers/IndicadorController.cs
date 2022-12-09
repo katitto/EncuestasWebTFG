@@ -16,7 +16,16 @@ namespace EncuestasWeb.Controllers
             return View();
         }
 
+
+        public JsonResult Obtener()
+
+        {
+            List<Indicador> oListaIndicador = CD_Indicador.ObtenerIndicador();
+            return Json(new { data = oListaIndicador }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
+
         public JsonResult Guardar(Indicador objeto)
         {
             bool respuesta = false; // la respuesta que devuelve nuestro procedimiento
@@ -56,7 +65,7 @@ namespace EncuestasWeb.Controllers
             return Json(rptListaUnidad, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ObtenerTipos(int id = 0)
+        public JsonResult ObtenerTipos()
         {
             List<Tipo> rptListaTipo = new List<Tipo>();
             rptListaTipo = CD_Tipo.ObtenerTipo();

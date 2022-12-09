@@ -38,9 +38,7 @@ $(document).ready(function () {
             { "data": "Contrasena" },//debe ir oculta
             { "data": "Email" },
             {
-                "data": "oEje", render: function (data) {
-                    return data.Nombre
-                }
+                "data": "IdEje"
             },
             {
                 "data": "oRol", render: function (data) {
@@ -75,14 +73,14 @@ function abrirPopUpForm(json) {
         $("#txtuser").val(json.User);
         $("#txtcontrasena").val(json.Contrasena);
         $("#txtemail").val(json.Email);
-        //$("#txtideje").val(json.IdEje);
+        $("#txtideje").val(json.IdEje);
         //$("#txtidrol").val(json.IdRol);
         $.get("Usuario/ObtenerRoles", function (data) {
-            cargaComboSelecRoles(json.IdRol, data, document.getElementById("cboRoles"));
+            cargaComboSelecRoles(json.oRol.IdRol, data, document.getElementById("cboRoles"));
         });
-        $.get("Usuario/ObtenerEjes", function (data) {
-            cargaComboSelecEjes(json.IdEje, data, document.getElementById("cboEjes"));
-        });
+        //$.get("Usuario/ObtenerEjes", function (data) {
+        //    cargaComboSelecEjes(json.IdEje, data, document.getElementById("cboEjes"));
+        //});
 
 
     } else {
@@ -92,14 +90,14 @@ function abrirPopUpForm(json) {
         $("#txtuser").val("");
         $("#txtcontrasena").val("");
         $("#txtemail").val("");
-        //$("#txtideje").val("");
+        $("#txtideje").val("");
         //$("#txtidrol").val("");
         $.get("Usuario/ObtenerRoles", function (data) {
             cargaComboSelecRoles("", data, document.getElementById("cboRoles"));
         });
-        $.get("Usuario/ObtenerEjes", function (data) {
-            cargaComboSelecEjes("", data, document.getElementById("cboEjes"));
-        });
+        //$.get("Usuario/ObtenerEjes", function (data) {
+        //    cargaComboSelecEjes("", data, document.getElementById("cboEjes"));
+        //});
     }
 
     $('#FormModal').modal('show');
@@ -118,11 +116,11 @@ function Guardar() {
                 User: $("#txtuser").val(),
                 Contrasena: $("#txtcontrasena").val(),
                 Email: $("#txtemail").val(),
-                //IdEje: $("#txtideje").val(),
+                IdEje: $("#txtideje").val(),
                 //IdRol: $("#txtidrol").val()
-                oEje: {
-                    IdEje: $("#cboEjes").val()
-                },
+                //oEje: {
+                //    IdEje: $("#cboEjes").val()
+                //},
                 oRol: {
                     IdRol: $("#cboRoles").val()
                 }
@@ -211,15 +209,15 @@ function cargaComboSelecRoles(value, data, control) {
     control.innerHTML = contenido;
     control.value = value;
 }
-function cargaComboSelecEjes(value, data, control) {
-    var contenido = "";
-    var nfilas = Object.keys(data).length;
-    //cargar el combo
-    for (var i = 0; i < nfilas; i++) {
-        contenido += "<option value='" + data[i].IdEje + "'>"
-        contenido += data[i].Nombre;
-        contenido += "</option>"
-    }
-    control.innerHTML = contenido;
-    control.value = value;
-}
+//function cargaComboSelecEjes(value, data, control) {
+//    var contenido = "";
+//    var nfilas = Object.keys(data).length;
+//    //cargar el combo
+//    for (var i = 0; i < nfilas; i++) {
+//        contenido += "<option value='" + data[i].IdEje + "'>"
+//        contenido += data[i].Nombre;
+//        contenido += "</option>"
+//    }
+//    control.innerHTML = contenido;
+//    control.value = value;
+//}
