@@ -55,6 +55,43 @@ namespace CapaDatos
             }
         }
 
+        public static List<EjePrincipal> ObtenerMapa()
+        {
+            List<EjePrincipal> rptListaEjePrincipal = new List<EjePrincipal>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                SqlCommand cmd = new SqlCommand("usp_ObtenerMapa", oConexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    oConexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        rptListaEjePrincipal.Add(new EjePrincipal()
+                        {
+                            Nombre = dr["Nombre"].ToString(),                         
+                            oGeografia = new Geografia()
+                            {
+                                CoordenadasX = dr["CoordenadasX"].ToString(),
+                                CoordenadasY = dr["CoordenadasY"].ToString()
+                            }
+                        });
+
+                    }
+                    dr.Close();
+                    return rptListaEjePrincipal;
+                }
+                catch (Exception ex)
+                {
+                    rptListaEjePrincipal = null;
+                    return rptListaEjePrincipal;
+                }
+            }
+        }
+
         /*REGISTRAR EjePrincipal*/
         public static bool RegistrarEjePrincipal(EjePrincipal objeto)
         {
@@ -158,5 +195,7 @@ namespace CapaDatos
  
 
     }
+
+
 }
 
