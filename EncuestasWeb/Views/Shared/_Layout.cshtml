@@ -142,7 +142,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Campañas</a>
+                                        <a href="@Url.Action("Index","Encuesta")">Encuestas</a>
                                     </li>
                                     <li>
                                         <a href="@Url.Action("Index","Indicador")">Indicadores/Preguntas</a>
@@ -313,6 +313,10 @@
         $.MisUrls.urls({ Url_ObtenerIndicador: '@Url.Action("Obtener", "Indicador")' });
         $.MisUrls.urls({ Url_GuardarIndicador: '@Url.Action("Guardar", "Indicador")' });
         $.MisUrls.urls({ Url_EliminarIndicador: '@Url.Action("Eliminar", "Indicador")' });
+        //controlador Encuesta
+        $.MisUrls.urls({ Url_ObtenerEncuesta: '@Url.Action("Obtener", "Encuesta")' });
+        $.MisUrls.urls({ Url_GuardarEncuesta: '@Url.Action("Guardar", "Encuesta")' });
+        $.MisUrls.urls({ Url_EliminarEncuesta: '@Url.Action("Eliminar", "Encuesta")' });
 
         //lenguaje español datatable
         $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });

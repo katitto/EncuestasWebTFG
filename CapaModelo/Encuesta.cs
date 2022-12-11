@@ -12,5 +12,7 @@ namespace CapaModelo
         public string Descripcion { get; set; }
         public DateTime Fecha_Inicio { get; set; }
         public DateTime Fecha_Final { get; set; }
+        public Usuario oUsuario { get; set; }
+        public bool Activo { get; set; }
     }
 }
