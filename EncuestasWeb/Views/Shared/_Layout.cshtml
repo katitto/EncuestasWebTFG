@@ -90,7 +90,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">Informe 2</a>
+                                        <a href="@Url.Action("Index","InformeUsuarios")">Informe de Lista de Usuarios</a>
                                     </li>
                                     <li>
                                         <a href="#">Informe 3</a>
@@ -325,6 +325,7 @@
 
         //controlador Informe
         $.MisUrls.urls({ Url_ObtenerInformeMaps: '@Url.Action("Obtener", "InformeMaps")' });
+        $.MisUrls.urls({ Url_ObtenerUsuarios: '@Url.Action("Obtener", "InformeUsuarios")' });
 
         //controlador IndEnc
         $.MisUrls.urls({ Url_ObtenerEncuesta: '@Url.Action("Obtener", "IndEnc")' });

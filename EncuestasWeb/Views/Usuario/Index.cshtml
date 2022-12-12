@@ -86,10 +86,10 @@
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>User</th>
-                            <th>Contrasena</th>
+                            <th>Contraseña</th>
                             <th>Email</th>
-                            <th>IdEje</th>
-                            <th>IdRol</th>
+                            <th>Alcance en la organización</th>
+                            <th>Rol</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -148,20 +148,20 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="txtideje"> Alcance <span class="error"></span></label>
-                                @*<div class="content-select">
+                                <label for="txtideje"> Alcance en la organización <span class="error"></span></label>
+                                <div class="content-select">
                                     <select id="cboEjes" class="form-select">
                                     </select>
                                     <i></i>
-                                </div>*@
-                                <input type="text" class="form-control required" id="txtideje" name="ideje" autocomplete="9%%943511">
+                                </div>
+                                <input type="hidden" id="txtideje" name="ideje" autocomplete="9%%943511">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtidrol"> Rol <span class="error"></span></label>
                                 <div class="content-select">
-                                    <select id="cboRoles" class="form-select">
+                                    <select id="cboRoles" class="form-select required">
                                     </select>
                                     <i></i>
                                 </div>

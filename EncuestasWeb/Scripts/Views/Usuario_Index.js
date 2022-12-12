@@ -9,7 +9,7 @@ $(document).ready(function () {
             User: "required",
             Contrasena: "required",
             Email: "required",
-            IdEje: "required",
+            RefEje: "required",
             IdRol: "required"
         },
         messages: {
@@ -38,7 +38,7 @@ $(document).ready(function () {
             { "data": "Contrasena" },//debe ir oculta
             { "data": "Email" },
             {
-                "data": "IdEje"
+                "data": "RefEje"
             },
             {
                 "data": "oRol", render: function (data) {
@@ -53,6 +53,12 @@ $(document).ready(function () {
                 "orderable": false,
                 "searchable": false,
                 "width": "90px"
+            }
+        ],
+        "columnDefs": [
+            {
+                "targets": 3,
+                "visible": false
             }
         ],
         "language": {
@@ -73,14 +79,14 @@ function abrirPopUpForm(json) {
         $("#txtuser").val(json.User);
         $("#txtcontrasena").val(json.Contrasena);
         $("#txtemail").val(json.Email);
-        $("#txtideje").val(json.IdEje);
+        $("#txtrefeje").val(json.RefEje);
         //$("#txtidrol").val(json.IdRol);
         $.get("Usuario/ObtenerRoles", function (data) {
             cargaComboSelecRoles(json.oRol.IdRol, data, document.getElementById("cboRoles"));
         });
-        //$.get("Usuario/ObtenerEjes", function (data) {
-        //    cargaComboSelecEjes(json.IdEje, data, document.getElementById("cboEjes"));
-        //});
+        $.get("Usuario/ObtenerEjes", function (data) {
+            cargaComboSelecEjes(json.RefEje, data, document.getElementById("cboEjes"));
+        });
 
 
     } else {
@@ -90,14 +96,14 @@ function abrirPopUpForm(json) {
         $("#txtuser").val("");
         $("#txtcontrasena").val("");
         $("#txtemail").val("");
-        $("#txtideje").val("");
+        $("#txtrefeje").val("");
         //$("#txtidrol").val("");
         $.get("Usuario/ObtenerRoles", function (data) {
             cargaComboSelecRoles("", data, document.getElementById("cboRoles"));
         });
-        //$.get("Usuario/ObtenerEjes", function (data) {
-        //    cargaComboSelecEjes("", data, document.getElementById("cboEjes"));
-        //});
+        $.get("Usuario/ObtenerEjes", function (data) {
+            cargaComboSelecEjes("", data, document.getElementById("cboEjes"));
+        });
     }
 
     $('#FormModal').modal('show');
@@ -105,6 +111,13 @@ function abrirPopUpForm(json) {
 }
 
 function Guardar() {
+
+    var Refeje = "";
+    if ($("#cboEjes").val() == null) {
+        Refeje = "";
+    } else {
+        Refeje = $("#cboEjes").val()
+    }
 
     if ($("#formNivel").valid()) {
 
@@ -116,11 +129,8 @@ function Guardar() {
                 User: $("#txtuser").val(),
                 Contrasena: $("#txtcontrasena").val(),
                 Email: $("#txtemail").val(),
-                IdEje: $("#txtideje").val(),
+                RefEje: Refeje,
                 //IdRol: $("#txtidrol").val()
-                //oEje: {
-                //    IdEje: $("#cboEjes").val()
-                //},
                 oRol: {
                     IdRol: $("#cboRoles").val()
                 }
@@ -209,15 +219,16 @@ function cargaComboSelecRoles(value, data, control) {
     control.innerHTML = contenido;
     control.value = value;
 }
-//function cargaComboSelecEjes(value, data, control) {
-//    var contenido = "";
-//    var nfilas = Object.keys(data).length;
-//    //cargar el combo
-//    for (var i = 0; i < nfilas; i++) {
-//        contenido += "<option value='" + data[i].IdEje + "'>"
-//        contenido += data[i].Nombre;
-//        contenido += "</option>"
-//    }
-//    control.innerHTML = contenido;
-//    control.value = value;
-//}
+function cargaComboSelecEjes(value, data, control) {
+    var contenido = "";
+    var nfilas = Object.keys(data).length;
+    //cargar el combo
+    contenido += "<option value=''>";
+    for (var i = 0; i < nfilas; i++) {
+        contenido += "<option value='" + data[i].RefEje + "'>"
+        contenido += data[i].RefEje;
+        contenido += "</option>"
+    }
+    control.innerHTML = contenido;
+    control.value = value;
+}

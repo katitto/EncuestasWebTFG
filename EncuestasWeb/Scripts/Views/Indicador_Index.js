@@ -13,9 +13,9 @@ $(document).ready(function () {
         messages: {
             Descripcion: "(*)",
             IdUnidad: "(*)",
-            IdTipo: "required",
-            IdPerfil: "required",
-            RefIndicador: "required"
+            IdTipo: "(*)",
+            IdPerfil: "(*)",
+            RefIndicador: "(*)"
 
         },
         errorElement: 'span'

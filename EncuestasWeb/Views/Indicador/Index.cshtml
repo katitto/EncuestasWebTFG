@@ -69,7 +69,7 @@
 <!--compatble con menú-->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">Indicadores</li>
+        <li class="breadcrumb-item" aria-current="page">Preguntas</li>
     </ol>
 </nav>
 <div class="row">
@@ -88,7 +88,7 @@
                             <th>Descripcion</th>
                             <th>Unidad</th>
                             <th>Tipo</th>
-                            <th>Perfil</th>
+                            <th>Alcance en Organización</th>
                             <th>Referencia</th>
                             <th></th>
                         </tr>
@@ -106,7 +106,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Indicador/Pregunta</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pregunta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -133,7 +133,7 @@
                             <div class="form-group">
                                 <label for="txtunidad">Unidad <span class="error"></span></label>
                                 <div class="content-select">
-                                    <select id="cboUnidades" class="form-select">
+                                    <select id="cboUnidades" class="form-select required">
                                     </select>
                                     <i></i>
                                 </div>
@@ -144,7 +144,7 @@
                             <div class="form-group">
                                 <label for="txttipo">Tipo <span class="error"></span></label>
                                 <div class="content-select">
-                                    <select id="cboTipos" class="form-select">
+                                    <select id="cboTipos" class="form-select required">
                                     </select>
                                     <i></i>
                                 </div>
@@ -153,9 +153,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="txtperfil">Perfil/Alcance<span class="error"></span></label>
+                                <label for="txtperfil">Alcance en la Organización <span class="error"></span></label>
                                 <div class="content-select">
-                                    <select id="cboPerfiles" class="form-select">
+                                    <select id="cboPerfiles" class="form-select required">
                                     </select>
                                     <i></i>
                                 </div>
