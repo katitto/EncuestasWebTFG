@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaDatos;
+using CapaModelo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +14,12 @@ namespace EncuestasWeb.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public JsonResult Obtener()
+
+        {
+            List<EjePrincipal> oListaEjePrincipal = CD_EjePrincipal.ObtenerMapa();
+            return Json(oListaEjePrincipal, JsonRequestBehavior.AllowGet);
         }
     }
 }

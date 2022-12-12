@@ -15,6 +15,8 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
     <!--FIN-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -141,6 +143,9 @@
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
+                                    <li>
+                                        <a href="@Url.Action("Index","IndEnc")">Lanzamiento de Encuestas</a>
+                                    </li>
                                     <li>
                                         <a href="@Url.Action("Index","Encuesta")">Encuestas</a>
                                     </li>
@@ -317,6 +322,17 @@
         $.MisUrls.urls({ Url_ObtenerEncuesta: '@Url.Action("Obtener", "Encuesta")' });
         $.MisUrls.urls({ Url_GuardarEncuesta: '@Url.Action("Guardar", "Encuesta")' });
         $.MisUrls.urls({ Url_EliminarEncuesta: '@Url.Action("Eliminar", "Encuesta")' });
+
+        //controlador Informe
+        $.MisUrls.urls({ Url_ObtenerInformeMaps: '@Url.Action("Obtener", "InformeMaps")' });
+
+        //controlador IndEnc
+        $.MisUrls.urls({ Url_ObtenerEncuesta: '@Url.Action("Obtener", "IndEnc")' });
+        $.MisUrls.urls({ Url_ObtenerPreguntasfiltradas: '@Url.Action("ObtenerPreguntasFiltradas", "IndEnc")' });
+        $.MisUrls.urls({ Url_ObtenerPreguntas: '@Url.Action("ObtenerPreguntas", "IndEnc")' });
+        $.MisUrls.urls({ Url_GuardarIndEnc: '@Url.Action("Guardar", "IndEnc")' });
+        $.MisUrls.urls({ Url_EliminarIndEnc: '@Url.Action("Eliminar", "IndEnc")' });
+
 
         //lenguaje español datatable
         $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });

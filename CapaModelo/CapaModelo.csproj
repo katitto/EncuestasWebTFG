@@ -47,7 +47,7 @@
     <Compile Include="Encuesta.cs" />
     <Compile Include="GeoEje.cs" />
     <Compile Include="Geografia.cs" />
-    <Compile Include="Indec.cs" />
+    <Compile Include="IndEnc.cs" />
     <Compile Include="Indicador.cs" />
     <Compile Include="Perfil.cs" />
     <Compile Include="PerfilEje.cs" />
