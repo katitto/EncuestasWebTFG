@@ -12,14 +12,17 @@ namespace EncuestasWeb.Controllers
     {
         // GET: InformeMaps
         public ActionResult Index()
+
         {
+            
             return View();
         }
         public JsonResult Obtener()
 
         {
             List<EjePrincipal> oListaEjePrincipal = CD_EjePrincipal.ObtenerMapa();
-            return Json(oListaEjePrincipal, JsonRequestBehavior.AllowGet);
+            return Json(oListaEjePrincipal , JsonRequestBehavior.AllowGet);
+            
         }
     }
 }

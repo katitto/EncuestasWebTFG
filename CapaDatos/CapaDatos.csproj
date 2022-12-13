@@ -60,6 +60,7 @@
     <Compile Include="CD_Unidad.cs" />
     <Compile Include="CD_Usuario.cs" />
     <Compile Include="CD_UsuRol.cs" />
+    <Compile Include="CD_Votacion.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

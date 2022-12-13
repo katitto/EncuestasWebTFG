@@ -2040,6 +2040,7 @@
     <Content Include="Scripts\Views\InformeUsuarios_Index.js" />
     <Content Include="Scripts\Views\LlenarComboBox.js" />
     <Content Include="Scripts\Views\Perfil_Index2.js" />
+    <Content Include="Scripts\Views\Resultado_Index.js" />
     <Content Include="Scripts\Views\Rol_Index.js" />
     <Content Include="Scripts\Views\TablaJS_Index.js" />
     <Content Include="Scripts\Views\Tipo_Index.js" />

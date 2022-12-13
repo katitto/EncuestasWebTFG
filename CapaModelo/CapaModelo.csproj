@@ -54,12 +54,14 @@
     <Compile Include="PerInd.cs" />
     <Compile Include="Pregunta.cs" />
     <Compile Include="PreInd.cs" />
+    <Compile Include="Resultado.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tipo.cs" />
     <Compile Include="Unidad.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuRol.cs" />
+    <Compile Include="Votacion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

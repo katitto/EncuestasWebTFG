@@ -86,7 +86,7 @@
                                 <ul>
                                     <li>
                                         <a href="@Url.Action("Index","InformeMaps")">
-                                            Informe 1                                           
+                                            Ubicación de Tiendas                                         
                                         </a>
                                     </li>
                                     <li>
@@ -334,6 +334,8 @@
         $.MisUrls.urls({ Url_GuardarIndEnc: '@Url.Action("Guardar", "IndEnc")' });
         $.MisUrls.urls({ Url_EliminarIndEnc: '@Url.Action("Eliminar", "IndEnc")' });
 
+        //CONTROLADOR DASHBOARD
+        $.MisUrls.urls({ Url_obtenerResultados: '@Url.Action("ObtenerResultados", "DashBoard")' });
 
         //lenguaje español datatable
         $.MisUrls.urls({ Url_datatable_spanish: '@Url.Content("~/content/plugins/datatables/js/datatable_spanish.json")' });
