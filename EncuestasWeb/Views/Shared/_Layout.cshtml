@@ -85,16 +85,17 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
+                                        <a href="@Url.Action("Index","Dashboard")">Dashboard General</a>
+                                    </li>
+                                    <li>
                                         <a href="@Url.Action("Index","InformeMaps")">
-                                            Ubicación de Tiendas                                         
+                                            Ubicación de Tiendas
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@Url.Action("Index","InformeUsuarios")">Informe de Lista de Usuarios</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Informe 3</a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -150,13 +151,13 @@
                                         <a href="@Url.Action("Index","Encuesta")">Encuestas</a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Index","Indicador")">Indicadores/Preguntas</a>
+                                        <a href="@Url.Action("Index","Indicador")">Preguntas</a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Index","Unidad")">Unidades</a>
+                                        <a class="nav-link" name="unidades" href="@Url.Action("Index","Unidad")"><i class="fas fa-user-cog"></i>Unidades</a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Index","Tipo")">Tipos</a>
+                                        <a class="nav-link" name="tipos" href="@Url.Action("Index","Tipo")"><i class="fas fa-user-cog"></i>Tipos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -299,6 +300,9 @@
         $.MisUrls.urls({ Url_ObtenerEjePrincipal: '@Url.Action("Obtener", "EjePrincipal")' });
         $.MisUrls.urls({ Url_GuardarEjePrincipal: '@Url.Action("Guardar", "EjePrincipal")' });
         $.MisUrls.urls({ Url_EliminarEjePrincipal: '@Url.Action("Eliminar", "EjePrincipal")' });
+        $.MisUrls.urls({ Url_BuscarEncuestas: '@Url.Action("ObtenerEncuestas", "EjePrincipal")' });
+        $.MisUrls.urls({ Url_ObtenerEncuestasRellenar: '@Url.Action("ObtenerEncuestasTabla", "EjePrincipal")' });
+        $.MisUrls.urls({ Url_GuardarRespuesta: '@Url.Action("GuardarRespuesta", "EjePrincipal")' });
 
         //CONTROLADOR USUARIOS
         $.MisUrls.urls({ Url_ObtenerUsuarios: '@Url.Action("Obtener", "Usuario")' });
@@ -333,6 +337,8 @@
         $.MisUrls.urls({ Url_ObtenerPreguntas: '@Url.Action("ObtenerPreguntas", "IndEnc")' });
         $.MisUrls.urls({ Url_GuardarIndEnc: '@Url.Action("Guardar", "IndEnc")' });
         $.MisUrls.urls({ Url_EliminarIndEnc: '@Url.Action("Eliminar", "IndEnc")' });
+        $.MisUrls.urls({ Url_ObtenerDatosDesplegarEncuesta: '@Url.Action("ObtenerDatosDesplegarEncuesta", "IndEnc")' });
+        $.MisUrls.urls({ Url_GuardarData: '@Url.Action("GuardarDesplegarEncuesta", "IndEnc")' });
 
         //CONTROLADOR DASHBOARD
         $.MisUrls.urls({ Url_obtenerResultados: '@Url.Action("ObtenerResultados", "DashBoard")' });

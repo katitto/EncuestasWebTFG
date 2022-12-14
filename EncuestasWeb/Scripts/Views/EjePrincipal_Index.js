@@ -1,5 +1,5 @@
 ﻿var tabladata;
-
+var tabladataEncuesta;
 
 $(document).ready(function () {
     /*Interactua con la vista y trae datos*/
@@ -69,10 +69,11 @@ $(document).ready(function () {
                 "data": "IdEje", "render": function (data, type, row, meta) {
                     return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
                         "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>"
+                        + "<button class='btn btn-info btn-sm ml-2' type='button' onclick='buscarEncuestas(" + data + ")'><i class='fas fa-list'></i></button>"
                 },
                 "orderable": false,
                 "searchable": false,
-                "width": "90px"
+                "width": "100px"
             },
         ],
         "columnDefs": [
@@ -327,6 +328,8 @@ function refrescaTabla() {
                     "data": "IdEje", "render": function (data, type, row, meta) {
                         return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpForm(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>" +
                             "<button class='btn btn-danger btn-sm ml-2' type='button' onclick='eliminar(" + data + ")'><i class='fa fa-trash'></i></button>"
+                            + "<button class='btn btn-info btn-sm ml-2' type='button' onclick='buscarEncuestas(" + data + ")'><i class='fas fa-list'></i></button>"
+                            
                     },
                     "orderable": false,
                     "searchable": false,
@@ -360,5 +363,164 @@ function refrescaTabla() {
         $("#tbdata").dataTable().clear();
         tabladata.ajax.reload();
     });
+
+}
+
+function buscarEncuestas($id) {
+//buscamos encuestas desplegadas por id primero hacemos un controlador de leng que nos lance la query 
+//si es = 0 No Camapañas desplegadas en esta entidad
+//si no abre pop up o nueva pestaña mejor no?
+    $.get("EjePrincipal/ObtenerEncuestas/?id=" + $id, function (data) {
+        var nfilas = Object.keys(data).length;
+        if (nfilas == 0) {
+            swal({
+                title: "Mensaje",
+                text: "No existen Encuestas desplegadas en esta Entidad",
+                type: "warning"
+                
+            });
+
+        }
+        else {           
+
+            abrirPopUpFormEncuestas($id);
+            
+
+        }
+
+    });
+
+}
+
+function abrirPopUpFormEncuestas($id) {
+    //debería mostrar Tabla de encuestas:
+
+    $.get("EjePrincipal/ObtenerEncuestasTabla/?id=" + $id, function (data) {
+        var ArrayTodosOrdenado = [];
+        var nfilas = Object.keys(data).length;
+        for (var i = 0; i < nfilas; i++) {
+            let todosData = JSON.stringify(data[i]);
+            let todos = JSON.parse(todosData);
+            ArrayTodosOrdenado.push(todos);
+        }
+        $("#tbdataencuestas").dataTable().fnDestroy();
+
+        tabladataEncuesta = $('#tbdataencuestas').DataTable({ /*genera un objeto tabledata con el id indicado*/
+            "data": ArrayTodosOrdenado, //le damos la url que va ir al controlador
+            "datatype": "json",//le decimos el tipo
+            "columns": [ //le decimos qué columnas queremos mostrar
+
+                { "data": "DescripcionEncuesta" },//lo que tenemos en ddbb
+                { "data": "DescripcionIndicador" },
+                { "data": "Respuesta" },
+                { "data": "IdEje" },
+                {
+                    "data": "IdData", "render": function (data, type, row, meta) {
+                        return "<button class='btn btn-primary btn-sm' type='button' onclick='abrirPopUpFormPreguntas(" + JSON.stringify(row) + ")'><i class='fas fa-pen'></i></button>"
+                            
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "90px"
+                },
+
+            ],
+            "columnDefs": [
+                {
+                    "targets": 3,
+                    "visible": false
+                }
+            ],
+
+            "language": {
+                "url": $.MisUrls.url.Url_datatable_spanish
+            }
+        });
+  
+
+
+    });
+
+    $('#FormModalEncuestas').modal('show');
+
+}
+
+
+function abrirPopUpFormPreguntas(json) {
+
+    $("#txtid").val(0);
+
+    if (json != null) {
+        $("#txtideje").val(json.IdEje);
+        $("#txtid").val(json.IdData);
+        $("#txtdescripcionencuesta").val(json.DescripcionEncuesta);
+        $("#txtdescripcionindicador").val(json.DescripcionIndicador);
+        $("#txtrespuesta").val(json.Respuesta);
+       
+
+
+    } else {
+        $("#txtideje").val("");
+        $("#txtid").val("");
+        $("#txtdescripcionencuesta").val("");
+        $("#txtdescripcionindicador").val("");
+        $("#txtrespuesta").val("");
+    }
+
+    $('#FormModalPreguntas').modal('show');
+
+}
+
+function GuardarRespuesta() {
+
+    if ($("#formNivelPreguntas").valid()) {
+
+        //Objeto Geografia
+        var request = {
+            objeto: {
+                IdData: $("#txtid").val(),
+                Respuesta: $("#txtrespuesta").val(),              
+            }
+        }
+
+        jQuery.ajax({
+            url: $.MisUrls.url.Url_GuardarRespuesta,
+            type: "POST",
+            data: JSON.stringify(request),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                if (data.resultado) {
+
+                    $('#FormModal').modal('hide');
+                    swal({
+                        title: "Mensaje",
+                        text: "Guardado Correctamente",
+                        type: "success"
+
+                    });
+
+                } else {
+
+                    swal("Mensaje", "No se pudo guardar los cambios", "warning")
+                }
+            },
+            error: function (error) {
+                console.log(error)
+            },
+            beforeSend: function () {
+
+            },
+        });
+        
+
+    }
+
+}
+
+function refrescaTablaEncuestas() {
+    var idEje = document.getElementById("txtideje").value;
+    abrirPopUpFormEncuestas(idEje);
 
 }

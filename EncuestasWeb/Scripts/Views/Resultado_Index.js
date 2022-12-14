@@ -39,7 +39,7 @@ var option = {
     },
     series: [
         {
-            name: "Cantidad de Votos",
+            name: "Suma de cantidades",
             data: [120, 200, 150, 80, 70, 110, 130],
             type: 'bar',
             barWidth: '60%',
@@ -90,12 +90,15 @@ $(document).ready(function () {
 function buscarResultados() {
 
     if ($("#cboencuestas").val() == 0) {
-        swal("Mensaje", "Seleccione una elección", "warning")
+        swal("Mensaje", "Seleccione una Encuesta", "warning")
         return;
     }
+    /* obtener nombres de indicadores */
 
-    var dataMenbers = [];
-    var dataValues = [];
+
+
+    var dataIdIndicador = [];
+    var dataTotal = [];
 
     //OBTENER ELECCIONES
     jQuery.ajax({
@@ -104,8 +107,8 @@ function buscarResultados() {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            dataMenbers = [];
-            dataValues = [];
+            dataIdIndicador = [];//obtener  nombre del indicador 
+            dataTotal = [];
 
 
             //$(".card-resultados").LoadingOverlay("hide");
@@ -116,8 +119,8 @@ function buscarResultados() {
 
                 if (data.length) {
                     $.each(data, function (i, item) {
-                        dataMenbers.push(item.NombresCompleto);
-                        dataValues.push(item.Votos);
+                        dataIdIndicador.push(item.IdIndicador);
+                        dataTotal.push(item.Total);
 
                     })
 
@@ -126,8 +129,8 @@ function buscarResultados() {
 
 
             option.title.text = $("#cboelecciones option:selected").text();
-            option.xAxis.data = dataMenbers;
-            option.series[0].data = dataValues;
+            option.xAxis.data = dataIdIndicador;
+            option.series[0].data = dataTotal;
 
 
             // use configuration item and data specified to show chart

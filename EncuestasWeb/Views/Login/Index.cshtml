@@ -1,5 +1,6 @@
 ﻿
 @{
+
     Layout = null;
 }
 <!DOCTYPE html>
@@ -26,7 +27,7 @@
                                                 <span><img src="@Url.Content("~/Imagenes/votacion1.jfif")" alt="" height="100"></span>
                                             </a>
                                         </div>
-                                        <form action="@Url.Content("~/Login/Index")" method="post" class="p-2" >
+                                        <form action="@Url.Content("~/Login/Index")" method="post" class="p-2">
                                             <div class="form-group">
                                                 <label for="emailaddress">Correo</label>
                                                 <input class="form-control" type="email" name="correo" required="">
@@ -37,9 +38,13 @@
                                             </div>
 
                                             <div class="mb-3 text-center">
-                                                <button class="btn btn-primary btn-block" type="submit" >Ingresar</button>
+                                                <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
                                             </div>
                                         </form>
+                                    </div>
+
+                                    <div class="text-center mb-4 mt-3">
+                                        <h5 style="color:red"> @ViewBag.Message</h5>  
                                     </div>
                                     <!-- end card-body -->
                                 </div>

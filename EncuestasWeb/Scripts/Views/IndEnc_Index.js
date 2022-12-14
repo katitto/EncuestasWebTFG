@@ -70,12 +70,83 @@ function buscarPreguntas() {
 
     if ($("#cboelecciones").val() == 0) {
         
-        swal("Mensaje", "Seleccione una Encuesta", "warning")
+        swal({
+            title: "Mensaje",
+            text: "Debe seleccionar una encuesta",
+            type: "warning"
+
+        });
         return;
     }
     tabladata.ajax.url($.MisUrls.url.Url_ObtenerPreguntasfiltradas + "?idencuesta=" + $("#cboencuestas").val()).load();
 
 }
+
+
+/*lanzar preguntas*/ 
+function lanzaPreguntas() {
+    //select  de indenc
+    if ($("#cboelecciones").val() == 0) {
+
+        swal("Mensaje", "Seleccione una Encuesta", "warning")
+        return;
+    }
+
+    $.get("IndEnc/ObtenerDatosDesplegarEncuesta/?idencuesta=" + $("#cboencuestas").val(), function (data) {
+    /*    var ArrayTodos = [];*/
+        var nfilas = Object.keys(data).length;
+        for (var i = 0; i < nfilas; i++) {
+            let despliegueData = JSON.stringify(data[i]);
+            let despliegue = JSON.parse(despliegueData);
+            /*          ArrayTodos.push(despliegue);*/
+            var request = {
+                objeto: {
+                    IdIndicador: despliegue.IdIndicador,
+                    IdEncuesta: despliegue.IdEncuesta,
+                    IdPerfil: despliegue.IdPerfil,
+                    IdEje: despliegue.IdEje
+                    //pasamos a recoger el valor del select
+                    /*al guardar tenemos que coger el valor del select*/
+                }
+            }
+
+            jQuery.ajax({
+                url: $.MisUrls.url.Url_GuardarData,
+                type: "POST",
+                data: JSON.stringify(request),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    if (data.resultado) {
+                        $('#FormModal').modal('hide');
+                        /*refrescaTabla();*/
+                        swal("Mensaje", "Despliegue Correcto de Encuesta", "success")
+                    } else {
+
+                        swal("Mensaje", "No se pudo guardar los cambios", "warning")
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+                beforeSend: function () {
+
+                },
+            });
+            //alert(JSON.stringify(despliegue));
+        }
+        //vamos a guardar en la tabla TDATA
+
+
+
+    });
+
+
+   // tabladata.ajax.url($.MisUrls.url.Url_ObtenerDatosDesplegarEncuesta + "?idencuesta=" + $("#cboencuestas").val()).load();
+}
+
+/*lanzar preguntas*/
 function abrirPopUpForm(json) {
     CargaPreguntasCombo();
     $("#txtid").val(0);

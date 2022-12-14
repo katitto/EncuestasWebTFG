@@ -25,8 +25,8 @@ namespace EncuestasWeb.Controllers
             Usuario ObjUsuario = CD_Usuario.ObtenerUsuarios().Where(x => x.Email == correo && x.Contrasena == clave).FirstOrDefault();
 
             if (ObjUsuario == null)
-            {
-                ViewBag.Error = "Usuario o contraseña no correcta";
+            {   
+                ViewBag.Message = "Usuario o contraseña no correcta";
                 return View();
             }
 

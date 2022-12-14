@@ -83,6 +83,29 @@ namespace EncuestasWeb.Views
             rptListaEjePrincipal = CD_EjePrincipal.ObtenerEjePrincipal().Where(x => x.IdEjePadre == id).ToList();
             return Json(rptListaEjePrincipal, JsonRequestBehavior.AllowGet);
         }
+        //obtener Encuestas
+        public JsonResult ObtenerEncuestas(int id)
+        {
+            List<Data> rptListaEncuestas = CD_Data.ObtenerEncuestas(id);
 
+            return Json (rptListaEncuestas, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ObtenerEncuestasTabla(int id)
+        {
+            List<Data> rptListaEncuestas = CD_Data.ObtenerEncuestas(id);
+
+            return Json(rptListaEncuestas , JsonRequestBehavior.AllowGet);
+        }
+
+        
+        [HttpPost]
+        public JsonResult GuardarRespuesta(Data objeto)
+        {
+            bool respuesta = false; // la respuesta que devuelve nuestro procedimiento
+
+            respuesta = CD_Data.ActualizarRespuesta(objeto);  //MODIFICA
+           
+            return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

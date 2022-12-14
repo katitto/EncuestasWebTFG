@@ -59,6 +59,13 @@ namespace EncuestasWeb.Controllers
 
             return Json(new { data = olista }, JsonRequestBehavior.AllowGet);
         }
+        //obtener datos despliegue encuesta filtrar por encuesta
+        [HttpGet]
+        public JsonResult ObtenerDatosDesplegarEncuesta(int idencuesta)
+        {
+            List<IndEnc> olista = CD_IndEnc.ObtenerDatosDesplegarEncuesta(idencuesta);
+            return Json(olista, JsonRequestBehavior.AllowGet);
+        }
 
 
         [HttpPost]
@@ -81,6 +88,24 @@ namespace EncuestasWeb.Controllers
 
             return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
         }
+
+        //insertar datos desplegados por encuesta
+        [HttpPost]
+        public JsonResult GuardarDesplegarEncuesta(Data objeto)
+        {
+            bool respuesta = false; // la respuesta que devuelve nuestro procedimiento
+
+            if (objeto.IdIndicador != 0 && objeto.IdEncuesta != 0 && objeto.IdEje != 0) //si el objeto que me pasan tiene el id = 0, es decir, no existe entonces la clave que nos trae la encriptanos, en nuestro caso no aplica
+            {
+
+                respuesta = CD_Data.RegistrarDesplegarEncuesta(objeto); // GUARDA
+            }
+
+            return Json(new { resultado = respuesta }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
    
 

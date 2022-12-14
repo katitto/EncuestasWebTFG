@@ -18,6 +18,7 @@ namespace CapaModelo
         public string Tipo { get; set; }
         public string Nombre { get; set; }
         public string RefPerfil { get; set; }
+        public int IdEje { get; set; }
 
 
 

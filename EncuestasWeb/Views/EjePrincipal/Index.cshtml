@@ -179,7 +179,104 @@
         </div>
     </div>
 </div>
+<!--modal encuestas-->
+<div class="modal fade" id="FormModalEncuestas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Rellenar Encuestas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
+            <!--Tabla encuestas-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-body">
+                        <table id="tbdataencuestas" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Encuesta</th>
+                                    <th>Pregunta</th>
+                                    <th>Respuesta</th>
+                                    <th>IdEje</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Tabla encuestas-->
+            <!--modal preguntas-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal encuestas-->
+<!--modal preguntas-->
+<div class="modal fade" id="FormModalPreguntas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Respuestas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input id="txtid" type="hidden" value="0" />
+
+                <form id="formNivelPreguntas">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtrespuesta"> Respuesta <span class="error"></span></label>
+                                <input type="text" class="form-control required" id="txtrespuesta" name="txtrespuesta" autocomplete="9%%943511">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @*<label for="txtideje">ID Eje <span class="error"></span></label>*@
+                                <input type="hidden" id="txtideje" name="txtideje" autocomplete="9%%943511">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @*<label for="txtdescripcionencuesta">DescripcionEncuesta<span class="error"></span></label>*@
+                                <input type="hidden" id="txtdescripcionencuesta" name="txtdescripcionencuesta" autocomplete="9%%943511">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @*<label for="txtdescripcionindicador">Indicador<span class="error"></span></label>*@
+                                <input type="hidden" id="txtdescripcionindicador" name="txtdescripcionindicador" autocomplete="9%%943511">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"  onclick="refrescaTablaEncuestas()" >Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarRespuesta()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--modal preguntas-->
 <!--Fin comptible menu-->
 <!--debe ser siempre el primero Jquery-->
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>

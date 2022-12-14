@@ -16,15 +16,15 @@ namespace EncuestasWeb.Controllers
             return View();
         }
         [HttpGet]
-        public JsonResult ObtenerResultados(int ideleccion)
+        public JsonResult ObtenerResultados(int idencuesta)
         {
-            List<Resultado> olista = CD_Votacion.ObtenerResultados(ideleccion);
+            List<Data> olista = CD_Data.ObtenerResultados(idencuesta);
 
             olista = (from row in olista
-                      select new Resultado()
+                      select new Data()
                       {
-                          //Valor = row.Valor,
-                          //NombreIndicador = row.NombreIndicador
+                          Total = row.Total,
+                          IdIndicador = row.IdIndicador
 
                       }).ToList();
 
@@ -36,5 +36,6 @@ namespace EncuestasWeb.Controllers
             Session["Usuario"] = null;
             return RedirectToAction("Index", "Login");
         }
+
     }
 }

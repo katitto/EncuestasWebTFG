@@ -106,6 +106,45 @@ namespace CapaDatos
 
         }
 
+
+
+        public static List<IndEnc> ObtenerDatosDesplegarEncuesta(int idencuesta)
+        {
+            List<IndEnc> rptListaEje = new List<IndEnc>();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.CN))
+            {
+                SqlCommand cmd = new SqlCommand("usp_ObtenerDatosDesplegarEncuesta", oConexion);
+                cmd.Parameters.AddWithValue("IdEncuesta", idencuesta);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    oConexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        rptListaEje.Add(new IndEnc()
+                        {
+                            IdIndicador = Convert.ToInt32(dr["IdIndicador"].ToString()),
+                            IdEncuesta = Convert.ToInt32(dr["IdEncuesta"].ToString()),                           
+                            IdPerfil = Convert.ToInt32(dr["IdPerfil"].ToString()),                           
+                            IdEje = Convert.ToInt32(dr["IdEje"].ToString())
+                        });
+                    }
+                    dr.Close();
+                    return rptListaEje;
+
+                }
+                catch (Exception ex)
+                {
+                    rptListaEje = null;
+                    return rptListaEje;
+                }
+            }
+
+        }
+
     }
 }
 
